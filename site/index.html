@@ -63,12 +63,12 @@
             <table id="error-table">
                 <thead>
                     <tr>
-                        <th data-sort="console">Console</th>
-                        <th data-sort="type">Type</th>
                         <th data-sort="code">Code</th>
-                        <th data-sort="isError">Error</th>
+                        <th data-sort="type">Type</th>
                         <th data-sort="name">Name</th>
                         <th data-sort="description">Description</th>
+                        <th data-sort="isError">Error</th>
+                        <th data-sort="console">Console</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -150,7 +150,7 @@
                         code: values[2],
                         isError: values[3] === '1',
                         name: values[4],
-                        description: values[5]?.replace(/^"|"$/g, '') || '' // Remove surrounding quotes if present
+                        description: values[5]?.replace(/^"|"$/g, '') || '', // Remove surrounding quotes if present
                     };
                 });
 
@@ -184,12 +184,12 @@
             sortedData.forEach(row => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${row.console}</td>
-                    <td>${row.type}</td>
                     <td>${row.code}</td>
-                    <td>${row.isError ? 'Yes' : 'No'}</td>
+                    <td>${row.type}</td>
                     <td>${row.name}</td>
                     <td>${row.description}</td>
+                    <td>${row.isError ? 'Yes' : 'No'}</td>
+                    <td>${row.console}</td>
                 `;
                 tbody.appendChild(tr);
             });
