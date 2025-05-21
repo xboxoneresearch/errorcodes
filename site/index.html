@@ -39,24 +39,32 @@
         <div id="error" class="error" style="display: none;"></div>
         <div id="table-container" class="table-container" style="display: none;">
             <div class="filters-bar">
-                <div class="filter-group">
-                    <label for="console-filter">Console:</label>
-                    <select id="console-filter" class="filter-select">
-                        <option value="">All Consoles</option>
-                    </select>
+                <div class="search-container">
+                    <div class="search-group">
+                        <input type="text" id="search-input" class="search-input" placeholder="Search by name or code...">
+                        <span class="material-icons search-clear">close</span>
+                    </div>
                 </div>
-                <div class="filter-group">
-                    <label for="type-filter">Type:</label>
-                    <select id="type-filter" class="filter-select">
-                        <option value="">All Types</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="error-filter">Show:</label>
-                    <select id="error-filter" class="filter-select">
-                        <option value="all">All Codes</option>
-                        <option value="errors">Errors Only</option>
-                    </select>
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="console-filter">Console:</label>
+                        <select id="console-filter" class="filter-select">
+                            <option value="">All Consoles</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="type-filter">Type:</label>
+                        <select id="type-filter" class="filter-select">
+                            <option value="">All Types</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="error-filter">Show:</label>
+                        <select id="error-filter" class="filter-select">
+                            <option value="all">All Codes</option>
+                            <option value="errors">Errors Only</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="active-filters" id="active-filters"></div>

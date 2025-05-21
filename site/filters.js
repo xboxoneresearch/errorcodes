@@ -3,13 +3,31 @@
 export let filters = {
     console: '',
     type: '',
-    error: 'all'
+    error: 'all',
+    search: ''
 };
 
 export function setupFilters(errorData, onFilterChange) {
     // Get unique values for console and type
     const consoles = [...new Set(errorData.map(row => row.console))].sort();
     const types = [...new Set(errorData.map(row => row.type))].sort();
+
+    // Setup search functionality
+    const searchInput = document.getElementById('search-input');
+    const searchClear = document.querySelector('.search-clear');
+
+    searchInput.addEventListener('input', (e) => {
+        filters.search = e.target.value.toLowerCase();
+        updateActiveFilters(onFilterChange);
+        onFilterChange();
+    });
+
+    searchClear.addEventListener('click', () => {
+        searchInput.value = '';
+        filters.search = '';
+        updateActiveFilters(onFilterChange);
+        onFilterChange();
+    });
 
     // Populate console filter
     const consoleFilter = document.getElementById('console-filter');
@@ -104,6 +122,12 @@ export function applyFilters(errorData) {
     }
     if (filters.error === 'errors') {
         filteredData = filteredData.filter(row => row.isError);
+    }
+    if (filters.search) {
+        filteredData = filteredData.filter(row => 
+            row.name.toLowerCase().includes(filters.search) ||
+            row.code.toLowerCase().includes(filters.search)
+        );
     }
     return filteredData;
 } 
