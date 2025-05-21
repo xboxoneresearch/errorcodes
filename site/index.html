@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xbox POST / Error Codes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>Xbox POST Error Codes</h1>
+                    <div class="subtext"><a href="https://xboxresearch.com">by xboxresearch.com</a></div>
+                </div>
+                <div class="header-actions">
+                    <a href="https://github.com/XboxOneResearch/errorcodes" target="_blank" class="icon-link" title="GitHub Repository">
+                        <span class="material-icons">code</span>
+                    </a>
+                    <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+                        <span class="material-icons">dark_mode</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="info-text">
+            <center>
+            To read out POST Codes, use the <code>PicoDurangoPOST</code> project. You can find it here: <a href="https://github.com/XboxOneResearch/PicoDurangoPOST" target="_blank">https://github.com/XboxOneResearch/PicoDurangoPOST</a><br><br>
+            Consider a donation or sponsoring if you find this project useful!
+            </center>
+        </div>
+        <div id="loading" class="loading">Loading error codes...</div>
+        <div id="error" class="error" style="display: none;"></div>
+        <div id="table-container" class="table-container" style="display: none;">
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <label for="console-filter">Console:</label>
+                    <select id="console-filter" class="filter-select">
+                        <option value="">All Consoles</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="type-filter">Type:</label>
+                    <select id="type-filter" class="filter-select">
+                        <option value="">All Types</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="error-filter">Show:</label>
+                    <select id="error-filter" class="filter-select">
+                        <option value="all">All Codes</option>
+                        <option value="errors">Errors Only</option>
+                    </select>
+                </div>
+            </div>
+            <div class="active-filters" id="active-filters"></div>
+            <table id="error-table">
+                <thead>
+                    <tr>
+                        <th data-sort="console">Console</th>
+                        <th data-sort="type">Type</th>
+                        <th data-sort="code">Code</th>
+                        <th data-sort="isError">Error</th>
+                        <th data-sort="name">Name</th>
+                        <th data-sort="description">Description</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script type="module">
+        import { filters, setupFilters, updateActiveFilters, applyFilters } from './filters.js';
+
+        let errorData = [];
+        let currentSort = { column: 'code', direction: 'asc' };
+
+        // Theme handling
+        function setupTheme() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle.querySelector('.material-icons');
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                themeIcon.textContent = savedTheme === 'dark' ? 'light_mode' : 'dark_mode';
+            }
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                themeIcon.textContent = newTheme === 'dark' ? 'light_mode' : 'dark_mode';
+            });
+        }
+
+        async function fetchErrorCodes() {
+            try {
+                const response = await fetch('postcodes.csv');
+                if (!response.ok) throw new Error('Failed to fetch error codes');
+                const csvText = await response.text();
+                parseCSV(csvText);
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').textContent = 'Error loading error codes: ' + error.message;
+            }
+        }
+
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n');
+            const headers = lines[0].split(',');
+            
+            errorData = lines.slice(1)
+                .filter(line => line.trim())
+                .map(line => {
+                    // Split by comma but respect quoted values
+                    const values = [];
+                    let currentValue = '';
+                    let insideQuotes = false;
+                    
+                    for (let i = 0; i < line.length; i++) {
+                        const char = line[i];
+                        
+                        if (char === '"') {
+                            insideQuotes = !insideQuotes;
+                        } else if (char === ',' && !insideQuotes) {
+                            values.push(currentValue);
+                            currentValue = '';
+                        } else {
+                            currentValue += char;
+                        }
+                    }
+                    // Push the last value
+                    values.push(currentValue);
+
+                    return {
+                        console: values[0],
+                        type: values[1],
+                        code: values[2],
+                        isError: values[3] === '1',
+                        name: values[4],
+                        description: values[5]?.replace(/^"|"$/g, '') || '' // Remove surrounding quotes if present
+                    };
+                });
+
+            setupFilters(errorData, renderTable);
+            renderTable();
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('table-container').style.display = 'block';
+        }
+
+        function renderTable() {
+            const tbody = document.querySelector('#error-table tbody');
+            tbody.innerHTML = '';
+            let filteredData = applyFilters(errorData);
+            // Apply sorting
+            const sortedData = filteredData.sort((a, b) => {
+                const aValue = a[currentSort.column];
+                const bValue = b[currentSort.column];
+                
+                if (currentSort.column === 'code') {
+                    // Sort hex codes numerically
+                    return currentSort.direction === 'asc' 
+                        ? parseInt(aValue, 16) - parseInt(bValue, 16)
+                        : parseInt(bValue, 16) - parseInt(aValue, 16);
+                }
+                
+                return currentSort.direction === 'asc'
+                    ? String(aValue).localeCompare(String(bValue))
+                    : String(bValue).localeCompare(String(aValue));
+            });
+
+            sortedData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.console}</td>
+                    <td>${row.type}</td>
+                    <td>${row.code}</td>
+                    <td>${row.isError ? 'Yes' : 'No'}</td>
+                    <td>${row.name}</td>
+                    <td>${row.description}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function setupSorting() {
+            document.querySelectorAll('th').forEach(th => {
+                th.addEventListener('click', (e) => {
+                    const column = th.dataset.sort;
+                    if (currentSort.column === column) {
+                        currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        currentSort.column = column;
+                        currentSort.direction = 'asc';
+                    }
+
+                    // Update sort indicators
+                    document.querySelectorAll('th').forEach(header => {
+                        header.classList.remove('asc', 'desc');
+                    });
+                    th.classList.add(currentSort.direction);
+
+                    renderTable();
+                });
+            });
+        }
+
+        // Initialize
+        setupTheme();
+        fetchErrorCodes();
+        setupSorting();
+    </script>
+</body>
+</html> 

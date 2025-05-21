@@ -1,0 +1,344 @@
+:root {
+    /* Light theme (default) */
+    --primary-color: #6200ee;
+    --primary-variant: #3700b3;
+    --secondary-color: #ff7300;
+    --background: #ffffff;
+    --surface: #ffffff;
+    --error: #b00020;
+    --on-primary: #ffffff;
+    --on-secondary: #000000;
+    --on-background: #000000;
+    --on-surface: #000000;
+    --on-error: #ffffff;
+    --border-color: rgba(0,0,0,0.1);
+    --hover-color: rgba(0,0,0,0.04);
+}
+
+[data-theme="dark"] {
+    --primary-color: #23af00;
+    --primary-variant: #2f6800;
+    --secondary-color: #ff3c00;
+    --background: #121212;
+    --surface: #1e1e1e;
+    --error: #cf6679;
+    --on-primary: #000000;
+    --on-secondary: #000000;
+    --on-background: #ffffff;
+    --on-surface: #ffffff;
+    --on-error: #000000;
+    --border-color: rgba(255,255,255,0.1);
+    --hover-color: rgba(255,255,255,0.05);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+    color: var(--on-background);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: var(--on-primary);
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.subtext {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 4px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon-link {
+    color: var(--on-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.icon-link:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.icon-link .material-icons {
+    font-size: 24px;
+}
+
+.icon-link[title="Sponsor"] .material-icons {
+    color: #db61a2;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--on-primary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.theme-toggle .material-icons {
+    font-size: 24px;
+}
+
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+    background: var(--surface);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+    table-layout: auto;
+}
+
+th:first-child {
+    border-top-left-radius: 8px;
+}
+
+th:last-child {
+    border-top-right-radius: 8px;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: var(--on-primary);
+    padding: 12px 32px 12px 12px;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+}
+
+th::after {
+    content: '↕';
+    position: absolute;
+    right: 12px;
+    opacity: 0.5;
+}
+
+th.asc::after {
+    content: '↑';
+    opacity: 1;
+}
+
+th.desc::after {
+    content: '↓';
+    opacity: 1;
+}
+
+th.filter-active {
+    background-color: var(--secondary-color);
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.filter-checkbox {
+    margin: 0;
+    cursor: pointer;
+}
+
+.filter-label {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+    transition: border-color 0.3s;
+}
+
+tr:hover {
+    background-color: var(--hover-color);
+    transition: background-color 0.3s;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transition: color 0.3s;
+}
+
+.error {
+    color: var(--error);
+    padding: 20px;
+    text-align: center;
+    transition: color 0.3s;
+}
+
+.filters-bar {
+    background: var(--surface);
+    padding: 16px;
+    margin-top: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-size: 14px;
+    color: var(--on-surface);
+    opacity: 0.9;
+}
+
+.filter-select {
+    background: var(--background);
+    color: var(--on-background);
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.filter-select option {
+    background: var(--background);
+    color: var(--on-background);
+}
+
+.active-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    padding: 0 16px;
+}
+
+.filter-tag {
+    background: var(--primary-color);
+    color: var(--on-primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.filter-tag .material-icons {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Remove the fixed width styles */
+/* Column specific widths */
+th[data-sort="console"],
+th[data-sort="type"],
+th[data-sort="code"],
+th[data-sort="isError"],
+th[data-sort="name"],
+th[data-sort="description"],
+td:nth-child(1),
+td:nth-child(2),
+td:nth-child(3),
+td:nth-child(4),
+td:nth-child(5),
+td:nth-child(6) {
+    min-width: 0;
+}
+
+.info-text {
+    background: var(--surface);
+    color: var(--on-surface);
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 4px;
+    font-size: 14px;
+    border-left: 4px solid var(--primary-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.info-text a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.info-text a:hover {
+    text-decoration: underline;
+} 
