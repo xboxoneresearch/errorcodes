@@ -2,7 +2,10 @@
 
 Repository contains listings of POST / error codes
 
+Website: https://xboxoneresearch.github.io/errorcodes/
+
 [POST Codes list](./postcodes.csv)
+
 [System errors list](./system.csv)
 
 ## Console Types
