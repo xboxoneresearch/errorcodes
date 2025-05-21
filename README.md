@@ -2,8 +2,8 @@
 
 Repository contains listings of POST / error codes
 
-[POST Codes list][./postcodes.csv]
-[System errors list][./system.csv]
+[POST Codes list](./postcodes.csv)
+[System errors list](./system.csv)
 
 ## Console Types
 
