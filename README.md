@@ -8,6 +8,10 @@ Website: https://xboxoneresearch.github.io/errorcodes/
 
 [System errors list](./system.csv)
 
+[System errors (E errors) by @TorusHyperV](https://github.com/TorusHyperV/XboxOne-EXXX-err-Codes)
+
+These will be transferred over here eventually to have everything in one place.
+
 ## Console Types
 
 | Identifier | Name                   |
