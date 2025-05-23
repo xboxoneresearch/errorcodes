@@ -32,3 +32,9 @@ These will be transferred over here eventually to have everything in one place.
 | CPU        | CPU                |
 | OS         | Operating System   |
 
+## Credits / Greetz
+
+- [@craftbenmine](https://github.com/craftbenmine)
+- [@dony](https://github.com/apewalkers)
+- [@ACE Console Repairs](https://github.com/ACE-AU)
+- The rest of the team
