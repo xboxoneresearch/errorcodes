@@ -60,6 +60,7 @@ class ErrorMaskDefinition:
     Console: List[str] | str
     Type: str
     Bitmask: int
+    Code: int
     Name: str
     Description: str
 
@@ -70,6 +71,7 @@ class ErrorMaskDefinition:
         assert row["Type"] in ALL_CODE_TYPES
         assert row["Bitmask"].startswith("0x")
         assert int(row["Bitmask"], 16) is not None
+        assert int(row["Code"], 16) is not None
         assert "Name" in row
         assert "Description" in row
         assert "rest" not in row, "Row was parsed incorrectly, is the description quoted properly?"
@@ -77,6 +79,7 @@ class ErrorMaskDefinition:
             Console=console,
             Type=row["Type"],
             Bitmask=int(row["Bitmask"], 16),
+            Code=int(row["Code"], 16),
             Name=row["Name"],
             Description=row["Description"] 
         )
