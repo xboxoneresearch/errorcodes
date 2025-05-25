@@ -1,2 +1,0 @@
-Console,Type,Code,IsError,Name,Description
-ALL,OS,0x80070002,1,ERROR_FILE_NOT_FOUND,"File was not found"

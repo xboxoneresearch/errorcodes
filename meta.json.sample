@@ -1,0 +1,21 @@
+{
+    "formatVersion": 1,
+    "updated": "2025-05-25T12:13:36.919086+00:00",
+    "items": [
+        {
+            "metaType": "PostCodes",
+            "path": "postcodes.csv",
+            "hash": "vZy6aIVsrUKhfbrddzIsj7iBp9/gtk74n3Xk5NRLYoI="
+        },
+        {
+            "metaType": "ErrorMasks",
+            "path": "errormasks.csv",
+            "hash": "8zWdPcXoINglsXfari/4bG49nVwHstdiIsg2J9Qg7Eg="
+        },
+        {
+            "metaType": "OSErrors",
+            "path": "oserrors.csv",
+            "hash": "vZy6aIVsrUKhfbrddzIsj7iBp9/gtk74n3Xk5NRLYoI="
+        }
+    ]
+}
