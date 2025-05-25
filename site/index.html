@@ -7,6 +7,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
+    <style>
+        .console-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin: 2px;
+            color: white;
+        }
+        .console-badge.XOP { background-color: #107C10; }
+        .console-badge.XOS { background-color: #107C10; }
+        .console-badge.XOX { background-color: #107C10; }
+        .console-badge.XSS { background-color: #0078D4; }
+        .console-badge.XSX { background-color: #0078D4; }
+        .console-badge.ALL { background-color: #666666; }
+
+        footer {
+            margin-top: 3em;
+            padding: 1.5em 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+        }
+
+        .footer-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            color: var(--text-color);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+        }
+
+        .footer-link .material-icons {
+            font-size: 1.2em;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -38,6 +84,7 @@
         <div id="loading" class="loading">Loading error codes...</div>
         <div id="error" class="error" style="display: none;"></div>
         <div id="table-container" class="table-container" style="display: none;">
+            <div id="last-update" class="last-update" style="text-align: right; margin-bottom: 1em; color: #666; font-size: 0.9em;"></div>
             <div class="filters-bar">
                 <div class="search-container">
                     <div class="search-group">
@@ -61,7 +108,7 @@
                     <div class="filter-group">
                         <label for="error-filter">Show:</label>
                         <select id="error-filter" class="filter-select">
-                            <option value="all">All Codes</option>
+                            <option value="all">-</option>
                             <option value="errors">Errors Only</option>
                         </select>
                     </div>
@@ -84,11 +131,36 @@
         </div>
     </main>
 
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="https://github.com/xboxoneresearch" target="_blank" class="footer-link">
+                    <span class="material-icons">code</span>
+                    XOR GitHub organization
+                </a>
+                <a href="https://xboxresearch.com" target="_blank" class="footer-link">
+                    <span class="material-icons">public</span>
+                    xboxresearch.com
+                </a>
+            </div>
+        </div>
+    </footer>
+
     <script type="module">
         import { filters, setupFilters, updateActiveFilters, applyFilters } from './filters.js';
 
+        const SUPPORTED_FORMAT_VERSION = 2;
         let errorData = [];
         let currentSort = { column: 'code', direction: 'asc' };
+
+        const CONSOLE_NAMES = {
+            'XOP': 'Xbox One Phat',
+            'XOS': 'Xbox One S',
+            'XOX': 'Xbox One X',
+            'XSS': 'Xbox Series S',
+            'XSX': 'Xbox Series X',
+            'ALL': 'All'
+        };
 
         // Theme handling
         function setupTheme() {
@@ -112,9 +184,47 @@
             });
         }
 
+        async function fetchMetaJson() {
+            try {
+                const response = await fetch('meta.json');
+                if (!response.ok) throw new Error('Failed to fetch meta.json');
+                const meta = await response.json();
+                
+                if (meta.formatVersion !== SUPPORTED_FORMAT_VERSION) {
+                    throw new Error(`Unexpected format version: ${meta.formatVersion}`);
+                }
+
+                const postCodeItem = meta.items.find(item => item.metaType === 'PostCodes');
+                if (!postCodeItem) {
+                    throw new Error('PostCode item not found in meta.json');
+                }
+
+                // Display last update time
+                if (meta.updated) {
+                    const updateDate = new Date(meta.updated);
+                    const formattedDate = updateDate.toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    document.getElementById('last-update').textContent = `Last updated: ${formattedDate}`;
+                }
+
+                return postCodeItem;
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').textContent = 'Error loading meta.json: ' + error.message;
+                throw error;
+            }
+        }
+
         async function fetchErrorCodes() {
             try {
-                const response = await fetch('postcodes.csv');
+                const postCodeItem = await fetchMetaJson();
+                const response = await fetch(postCodeItem.path);
                 if (!response.ok) throw new Error('Failed to fetch error codes');
                 const csvText = await response.text();
                 parseCSV(csvText);
@@ -152,13 +262,22 @@
                     // Push the last value
                     values.push(currentValue);
 
+                    // Parse console column which can be a single value or comma-separated list
+                    const console = values[0].includes(',') 
+                        ? values[0].split(',').map(c => c.trim())
+                        : values[0];
+
+                    // Parse bitmask if present
+                    const bitmask = values[3] ? parseInt(values[3], 16) : null;
+
                     return {
-                        console: values[0],
+                        console: console,
                         type: values[1],
                         code: values[2],
-                        isError: values[3] === '1',
-                        name: values[4],
-                        description: values[5]?.replace(/^"|"$/g, '') || '', // Remove surrounding quotes if present
+                        bitmask: bitmask,
+                        isError: values[4] === '1',
+                        name: values[5],
+                        description: values[6]?.replace(/^"|"$/g, '') || '', // Remove surrounding quotes if present
                     };
                 });
 
@@ -190,16 +309,25 @@
             });
 
             sortedData.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${row.code}</td>
-                    <td>${row.type}</td>
-                    <td>${row.name}</td>
-                    <td>${row.description}</td>
-                    <td>${row.isError ? 'Yes' : 'No'}</td>
-                    <td>${row.console}</td>
-                `;
-                tbody.appendChild(tr);
+                // Don't show bitmasks to the user
+                if (row.bitmask === null)
+                {
+                    const tr = document.createElement('tr');
+                    const consoles = Array.isArray(row.console) ? row.console : [row.console];
+                    const consoleBadges = consoles.map(console => 
+                        `<span class="console-badge ${console}" title="${CONSOLE_NAMES[console]}">${CONSOLE_NAMES[console]}</span>`
+                    ).join('');
+                    
+                    tr.innerHTML = `
+                        <td>${row.code}</td>
+                        <td>${row.type}</td>
+                        <td>${row.name}</td>
+                        <td>${row.description}</td>
+                        <td>${row.isError ? 'Yes' : 'No'}</td>
+                        <td>${consoleBadges}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
             });
         }
 
