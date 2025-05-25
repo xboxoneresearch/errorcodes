@@ -22,6 +22,36 @@
         .console-badge.XSS { background-color: #0078D4; }
         .console-badge.XSX { background-color: #0078D4; }
         .console-badge.ALL { background-color: #666666; }
+
+        footer {
+            margin-top: 3em;
+            padding: 1.5em 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+        }
+
+        .footer-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            color: var(--text-color);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+        }
+
+        .footer-link .material-icons {
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -54,6 +84,7 @@
         <div id="loading" class="loading">Loading error codes...</div>
         <div id="error" class="error" style="display: none;"></div>
         <div id="table-container" class="table-container" style="display: none;">
+            <div id="last-update" class="last-update" style="text-align: right; margin-bottom: 1em; color: #666; font-size: 0.9em;"></div>
             <div class="filters-bar">
                 <div class="search-container">
                     <div class="search-group">
@@ -99,6 +130,21 @@
             </table>
         </div>
     </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="https://github.com/xboxoneresearch" target="_blank" class="footer-link">
+                    <span class="material-icons">code</span>
+                    XOR GitHub organization
+                </a>
+                <a href="https://xboxresearch.com" target="_blank" class="footer-link">
+                    <span class="material-icons">public</span>
+                    xboxresearch.com
+                </a>
+            </div>
+        </div>
+    </footer>
 
     <script type="module">
         import { filters, setupFilters, updateActiveFilters, applyFilters } from './filters.js';
@@ -151,6 +197,19 @@
                 const postCodeItem = meta.items.find(item => item.metaType === 'PostCodes');
                 if (!postCodeItem) {
                     throw new Error('PostCode item not found in meta.json');
+                }
+
+                // Display last update time
+                if (meta.updated) {
+                    const updateDate = new Date(meta.updated);
+                    const formattedDate = updateDate.toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    document.getElementById('last-update').textContent = `Last updated: ${formattedDate}`;
                 }
 
                 return postCodeItem;
