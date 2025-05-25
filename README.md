@@ -32,6 +32,15 @@ These will be transferred over here eventually to have everything in one place.
 | CPU        | CPU                |
 | OS         | Operating System   |
 
+## Scripts
+
+There are scripts to verify CSVs and also create metadata.
+
+- scripts/create_meta.py
+  - Usage: `./create_meta.py [destination meta.json]`
+  - Creates information about the last update of the bundle of CSV files
+  - meta.json can be used to programmatically check for updates on `https://errors.xboxresearch.com`, by downloading `https://errors.xboxresearch.com/meta.json`
+
 ## Credits / Greetz
 
 - [@craftbenmine](https://github.com/craftbenmine)

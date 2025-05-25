@@ -1,1 +1,2 @@
-site/postcodes.csv
+site/*.csv
+meta.json

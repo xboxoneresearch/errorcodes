@@ -3,7 +3,11 @@ name: Deploy static content to Pages
 on:
   push:
     branches: ["main"]
-
+    paths-ignore:
+      - '.gitignore'
+      - 'meta.json.sample'
+      - 'README.md'
+  pull_request:
   workflow_dispatch:
 
 
@@ -17,17 +21,44 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  prepare:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Copy postcodes csv
+      - name: Install python uv
+        run: pip install -U uv
+      - name: Verify CSVs
+        run: ./scripts/verify_via_meta.py meta.json.sample
+      - name: Create meta file
         run: |
-          cp postcodes.csv site/postcodes.csv
+          ./scripts/create_meta.py --postcodes postcodes.csv --errormasks errormasks.csv --oserrors oserrors.csv meta.json
+      - name: Copy files into site-dir
+        run: |
+          cp meta.json site/
+          cp *.csv site/
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          if-no-files-found: error
+          path: |
+            site
+
+  deploy:
+    needs: prepare
+    if: success() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: site
+      - name: List current dir
+        run: ls -R
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
