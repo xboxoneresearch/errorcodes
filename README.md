@@ -32,6 +32,24 @@ These will be transferred over here eventually to have everything in one place.
 | CPU        | CPU                |
 | OS         | Operating System   |
 
+## Metadata format
+
+There is a `meta.json` generated and uploaded to [errors.xboxresearch.com](https://errors.xboxresearch.com/meta.json).
+This can be used to programmatically retrieve the error lists and check for updates to locally stored files.
+
+Current `formatVersion` is `2`.
+
+Make sure to always check `formatVersion` when retrieving the data, to ensure the client can parse the CSV files.
+
+## CSV Structure
+
+You will probably **NOT** need this information when editing the CSV files, as most modern applications (Office suites etc.) should handle it properly.
+
+### General notes
+
+- If fields `Name` or `Description` contain spaces or characters other than `A-Z`, `a-z`, `_`, `-`, they need to be wrapped in `"`.
+- If field `Console` contains a comma-seperated list of applicable consoles, this need to wrapped in `"` as well.
+
 ## Scripts
 
 There are scripts to verify CSVs and also create metadata.

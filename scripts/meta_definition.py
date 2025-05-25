@@ -8,7 +8,7 @@ from datetime import datetime
 from pydantic import BaseModel, field_serializer
 from typing import List
 
-META_FORMAT_VERSION = 1
+META_FORMAT_VERSION = 2
 
 
 class MetaType(StrEnum):
@@ -34,7 +34,7 @@ def validate_definition(definition: MetaDefinition):
     # Pydantic does validate it partially for us.. but let's be extra sure :P
     assert definition is not None
     assert definition.formatVersion == META_FORMAT_VERSION, (
-        "Invalid formatVerison, expected: {META_FORMAT_VERSION}, got {definition.formatVersion}"
+        f"Invalid formatVerison, expected: {META_FORMAT_VERSION}, got {definition.formatVersion}"
     )
     assert isinstance(definition.updated, datetime)
     assert len(definition.items) > 0, (

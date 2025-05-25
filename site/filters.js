@@ -7,9 +7,20 @@ export let filters = {
     search: ''
 };
 
+const CONSOLE_NAMES = {
+    'XOP': 'Xbox One Phat',
+    'XOS': 'Xbox One S',
+    'XOX': 'Xbox One X',
+    'XSS': 'Xbox Series S',
+    'XSX': 'Xbox Series X',
+    'ALL': 'All'
+};
+
 export function setupFilters(errorData, onFilterChange) {
     // Get unique values for console and type
-    const consoles = [...new Set(errorData.map(row => row.console))].sort();
+    const consoles = [...new Set(errorData.flatMap(row => 
+        Array.isArray(row.console) ? row.console : [row.console]
+    ))].sort();
     const types = [...new Set(errorData.map(row => row.type))].sort();
 
     // Setup search functionality
@@ -31,17 +42,17 @@ export function setupFilters(errorData, onFilterChange) {
 
     // Populate console filter
     const consoleFilter = document.getElementById('console-filter');
-    consoleFilter.innerHTML = '<option value="">All Consoles</option>';
+    consoleFilter.innerHTML = '<option value="">-</option>';
     consoles.forEach(console => {
         const option = document.createElement('option');
         option.value = console;
-        option.textContent = console;
+        option.textContent = CONSOLE_NAMES[console];
         consoleFilter.appendChild(option);
     });
 
     // Populate type filter
     const typeFilter = document.getElementById('type-filter');
-    typeFilter.innerHTML = '<option value="">All Types</option>';
+    typeFilter.innerHTML = '<option value="">-</option>';
     types.forEach(type => {
         const option = document.createElement('option');
         option.value = type;
@@ -74,7 +85,7 @@ export function updateActiveFilters(onFilterChange) {
     activeFiltersContainer.innerHTML = '';
 
     if (filters.console) {
-        addFilterTag('Console: ' + filters.console, () => {
+        addFilterTag(`Console: ${CONSOLE_NAMES[filters.console]}`, () => {
             filters.console = '';
             document.getElementById('console-filter').value = '';
             updateActiveFilters(onFilterChange);
@@ -115,7 +126,10 @@ function addFilterTag(text, onRemove) {
 export function applyFilters(errorData) {
     let filteredData = [...errorData];
     if (filters.console) {
-        filteredData = filteredData.filter(row => row.console === filters.console);
+        filteredData = filteredData.filter(row => {
+            const consoles = Array.isArray(row.console) ? row.console : [row.console];
+            return consoles.includes(filters.console);
+        });
     }
     if (filters.type) {
         filteredData = filteredData.filter(row => row.type === filters.type);
