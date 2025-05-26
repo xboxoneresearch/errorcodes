@@ -186,7 +186,7 @@
 
         async function fetchMetaJson() {
             try {
-                const response = await fetch('meta.json');
+                const response = await fetch("meta.json", {cache: "no-cache"});
                 if (!response.ok) throw new Error('Failed to fetch meta.json');
                 const meta = await response.json();
                 
@@ -224,7 +224,7 @@
         async function fetchErrorCodes() {
             try {
                 const postCodeItem = await fetchMetaJson();
-                const response = await fetch(postCodeItem.path);
+                const response = await fetch(postCodeItem.path, {cache: "no-cache"});
                 if (!response.ok) throw new Error('Failed to fetch error codes');
                 const csvText = await response.text();
                 parseCSV(csvText);
