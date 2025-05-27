@@ -110,6 +110,15 @@ export function updateActiveFilters(onFilterChange) {
             onFilterChange();
         });
     }
+
+    if (filters.search) {
+        addFilterTag(`Search: ${filters.search}`, () => {
+            filters.search = '';
+            document.getElementById('search-input').value = '';
+            updateActiveFilters(onFilterChange);
+            onFilterChange();
+        });
+    }
 }
 
 function addFilterTag(text, onRemove) {

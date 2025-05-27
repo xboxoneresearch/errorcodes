@@ -162,6 +162,60 @@
             'ALL': 'All'
         };
 
+        // URL query parameter handling
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                console: params.get('console') || '',
+                type: params.get('type') || '',
+                error: params.get('error') || 'all',
+                search: params.get('search') || '',
+                sort: params.get('sort') || 'code',
+                direction: params.get('direction') || 'asc'
+            };
+        }
+
+        function updateURL() {
+            const params = new URLSearchParams();
+            if (filters.console) params.set('console', filters.console);
+            if (filters.type) params.set('type', filters.type);
+            if (filters.error !== 'all') params.set('error', filters.error);
+            if (filters.search) params.set('search', filters.search);
+            if (currentSort.column !== 'code') params.set('sort', currentSort.column);
+            if (currentSort.direction !== 'asc') params.set('direction', currentSort.direction);
+
+            const newURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+            window.history.replaceState({}, '', newURL);
+        }
+
+        function applyQueryParams() {
+            const params = getQueryParams();
+            
+            // Apply filters
+            filters.console = params.console;
+            filters.type = params.type;
+            filters.error = params.error;
+            filters.search = params.search;
+
+            // Apply sorting
+            currentSort.column = params.sort;
+            currentSort.direction = params.direction;
+
+            // Update UI elements
+            document.getElementById('console-filter').value = filters.console;
+            document.getElementById('type-filter').value = filters.type;
+            document.getElementById('error-filter').value = filters.error;
+            document.getElementById('search-input').value = filters.search;
+
+            // Update sort indicators
+            document.querySelectorAll('th').forEach(header => {
+                header.classList.remove('asc', 'desc');
+                if (header.dataset.sort === currentSort.column) {
+                    header.classList.add(currentSort.direction);
+                }
+            });
+        }
+
         // Theme handling
         function setupTheme() {
             const themeToggle = document.getElementById('theme-toggle');
@@ -281,7 +335,11 @@
                     };
                 });
 
-            setupFilters(errorData, renderTable);
+            setupFilters(errorData, () => {
+                renderTable();
+                updateURL();
+            });
+            applyQueryParams();
             renderTable();
             document.getElementById('loading').style.display = 'none';
             document.getElementById('table-container').style.display = 'block';
@@ -349,6 +407,7 @@
                     th.classList.add(currentSort.direction);
 
                     renderTable();
+                    updateURL();
                 });
             });
         }
