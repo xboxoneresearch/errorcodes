@@ -50,6 +50,12 @@ You will probably **NOT** need this information when editing the CSV files, as m
 - If fields `Name` or `Description` contain spaces or characters other than `A-Z`, `a-z`, `_`, `-`, they need to be wrapped in `"`.
 - If field `Console` contains a comma-seperated list of applicable consoles, this need to wrapped in `"` as well.
 
+### LibreOffice calc
+
+To open/edit the CSV files in LibreOffice Calc, use the following settings:
+
+![Libreoffice Calc CSV settings](./assets/csv_libreoffice_calc.png)
+
 ## Scripts
 
 There are scripts to verify CSVs and also create metadata.
