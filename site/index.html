@@ -7,52 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
-    <style>
-        .console-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.85em;
-            margin: 2px;
-            color: white;
-        }
-        .console-badge.XOP { background-color: #107C10; }
-        .console-badge.XOS { background-color: #107C10; }
-        .console-badge.XOX { background-color: #107C10; }
-        .console-badge.XSS { background-color: #0078D4; }
-        .console-badge.XSX { background-color: #0078D4; }
-        .console-badge.ALL { background-color: #666666; }
-
-        footer {
-            margin-top: 3em;
-            padding: 1.5em 0;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: center;
-            gap: 2em;
-        }
-
-        .footer-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5em;
-            color: var(--text-color);
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-
-        .footer-link:hover {
-            opacity: 1;
-        }
-
-        .footer-link .material-icons {
-            font-size: 1.2em;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -112,6 +66,12 @@
                             <option value="errors">Errors Only</option>
                         </select>
                     </div>
+                    <div class="filter-group">
+                        <label for="bitmask-filter">
+                            <input type="checkbox" id="bitmask-filter" class="filter-checkbox">
+                            Show errors with bitmask
+                        </label>
+                    </div>
                 </div>
             </div>
             <div class="active-filters" id="active-filters"></div>
@@ -152,6 +112,7 @@
         const SUPPORTED_FORMAT_VERSION = 2;
         let errorData = [];
         let currentSort = { column: 'code', direction: 'asc' };
+        let showBitmasks = false;
 
         const CONSOLE_NAMES = {
             'XOP': 'Xbox One Phat',
@@ -171,7 +132,8 @@
                 error: params.get('error') || 'all',
                 search: params.get('search') || '',
                 sort: params.get('sort') || 'code',
-                direction: params.get('direction') || 'asc'
+                direction: params.get('direction') || 'asc',
+                bitmask: params.get('bitmask') === 'true'
             };
         }
 
@@ -183,6 +145,7 @@
             if (filters.search) params.set('search', filters.search);
             if (currentSort.column !== 'code') params.set('sort', currentSort.column);
             if (currentSort.direction !== 'asc') params.set('direction', currentSort.direction);
+            if (showBitmasks) params.set('bitmask', 'true');
 
             const newURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
             window.history.replaceState({}, '', newURL);
@@ -196,6 +159,7 @@
             filters.type = params.type;
             filters.error = params.error;
             filters.search = params.search;
+            showBitmasks = params.bitmask;
 
             // Apply sorting
             currentSort.column = params.sort;
@@ -206,6 +170,7 @@
             document.getElementById('type-filter').value = filters.type;
             document.getElementById('error-filter').value = filters.error;
             document.getElementById('search-input').value = filters.search;
+            document.getElementById('bitmask-filter').checked = showBitmasks;
 
             // Update sort indicators
             document.querySelectorAll('th').forEach(header => {
@@ -367,25 +332,31 @@
             });
 
             sortedData.forEach(row => {
-                // Don't show bitmasks to the user
-                if (row.bitmask === null)
-                {
-                    const tr = document.createElement('tr');
-                    const consoles = Array.isArray(row.console) ? row.console : [row.console];
-                    const consoleBadges = consoles.map(console => 
-                        `<span class="console-badge ${console}" title="${CONSOLE_NAMES[console]}">${CONSOLE_NAMES[console]}</span>`
-                    ).join('');
-                    
-                    tr.innerHTML = `
-                        <td>${row.code}</td>
-                        <td>${row.type}</td>
-                        <td>${row.name}</td>
-                        <td>${row.description}</td>
-                        <td>${row.isError ? 'Yes' : 'No'}</td>
-                        <td>${consoleBadges}</td>
-                    `;
-                    tbody.appendChild(tr);
+                // Skip bitmask entries if not showing them
+                if (!showBitmasks && row.bitmask !== null) {
+                    return;
                 }
+
+                const tr = document.createElement('tr');
+                const consoles = Array.isArray(row.console) ? row.console : [row.console];
+                const consoleBadges = consoles.map(console => 
+                    `<span class="console-badge ${console}" title="${CONSOLE_NAMES[console]}">${CONSOLE_NAMES[console]}</span>`
+                ).join('');
+                
+                // Format code with bitmask if present
+                const codeDisplay = row.bitmask !== null 
+                    ? `${row.code} (${row.bitmask.toString(16).toUpperCase()})`
+                    : row.code;
+                
+                tr.innerHTML = `
+                    <td>${codeDisplay}</td>
+                    <td>${row.type}</td>
+                    <td>${row.name}</td>
+                    <td>${row.description}</td>
+                    <td>${row.isError ? 'Yes' : 'No'}</td>
+                    <td>${consoleBadges}</td>
+                `;
+                tbody.appendChild(tr);
             });
         }
 
@@ -416,6 +387,13 @@
         setupTheme();
         fetchErrorCodes();
         setupSorting();
+
+        // Add bitmask filter event listener
+        document.getElementById('bitmask-filter').addEventListener('change', (e) => {
+            showBitmasks = e.target.checked;
+            renderTable();
+            updateURL();
+        });
     </script>
 </body>
 </html> 

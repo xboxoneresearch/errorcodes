@@ -383,4 +383,60 @@ tr:hover {
 
 .info-text a:hover {
     text-decoration: underline;
-} 
+}
+
+.console-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    margin: 2px;
+    color: white;
+}
+.console-badge.XOP { background-color: #107C10; }
+.console-badge.XOS { background-color: #107C10; }
+.console-badge.XOX { background-color: #107C10; }
+.console-badge.XSS { background-color: #0078D4; }
+.console-badge.XSX { background-color: #0078D4; }
+.console-badge.ALL { background-color: #666666; }
+
+footer {
+    margin-top: 3em;
+    padding: 1.5em 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--text-color);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.footer-link:hover {
+    opacity: 1;
+}
+
+.footer-link .material-icons {
+    font-size: 1.2em;
+}
+
+.filter-checkbox {
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.filter-group label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
