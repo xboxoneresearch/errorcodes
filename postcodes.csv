@@ -3,8 +3,8 @@
 "XOP","SMC","0xE002",,1,"FATAL_V5","V_5P0 not available / timeout. -> Check short on V_5P0, check U3E2, Q3E1, Q3E2 and surrounding resistors."
 "XOP","SMC","0xE003",,1,"FATAL_PWRGPA","PWRGPA timeout / not reporting PWRGD -> Check short on V_3P3, V_SOC1P8PLL, VMEMIOAB/CD, VTT[ABCD]. Pull VREG_PWRGPA_EN to V_3P3STBY manually and check V_3P3, V_SOC1P8PLL, VMEMIOAB/CD, (VTT[ABCD]) voltages."
 "XOP","SMC","0xE004",,1,"FATAL_SBPOWERUP2",
-"XOP","SMC","0xE005",,1,"FATAL_PWRGPB","PWRGPB timeout / not reporting PWRGD -> Check short on V_FUSE, V_SOCPHY, V_NBCORE, V_MEMCORE. Pull VREG_PWRGPB_EN to V_3P3STBY manually and check V_FUSE, V_SOCPHY, V_NBCORE, V_MEMCORE voltages."
-"XOP","SMC","0xE006",,1,"FATAL_CPUGFX","CPUGFX_PWRGD timeout / not reporting PWRGD -> Check short on V_CPUCORE, V_GFXCORE (they can be low resistance, dont confuse with a short!), check R9C64, U9D2, U9D3, U9D4, U9E1, U9E2 drivers, mosfets and U9C2."
+"XOP","SMC","0xE005",,1,"FATAL_PWRGPB","PWRGPB timeout / not reporting PWRGD -> Check short on V_SOCPHY, V_NBCORE, V_MEMCORE. Pull VREG_PWRGPB_EN to V_3P3STBY manually and check V_FUSE, V_SOCPHY, V_NBCORE, V_MEMCORE voltages."
+"XOP","SMC","0xE006",,1,"FATAL_CPUGFX","CPUGFX_PWRGD timeout / not reporting PWRGD -> Check short on V_CPUCORE, V_GFXCORE (they can be low resistance, dont confuse with a short!), check R9C64, U9D2, U9D3, U9D4, U9E1, U9E2 drivers, 10 mosfets, surrounding resistors and U9C2."
 "XOP","SMC","0xE007",,1,"FATAL_FAN_STARTUP",
 "XOP","SMC","0xE008",,1,"FATAL_SBPOWERUP1","Wait for `SBPowerUp1(0)` to complete"
 "XOP","SMC","0xE009",,1,"FATAL_09",
@@ -23,7 +23,7 @@
 "XOP","SMC","0xE086",,1,"FATAL_CPUGFX_FAILURE","Thrown when console unplugged unexpectedly, CPUGFX_PWRGD went low while console was on. Check output filtering C8D1, C8D2, C8D4, C8E1, C8E5, C8E8, C8E10. General corrosion / timing problem in NCP area?"
 "XOP","SMC","0xE089",,1,"FATAL_NBCORE","U5F3 I2C unreachable -> Check surrounding traces, replace U5F3"
 "XOP","SMC","0xEB40",,1,"BOOT_SBUNRESETWAIT","V_SB2P5, V_SB1P1, V_SB1P8 timeout, unable to unreset southbridge. Check short on V_SB2P5, V_SB1P1, V_SB1P8, replace U3D3, U3E1 or U3D5 or surrounding resistors, southbridge"
-"XOP","SMC","0xEB41",,1,"BOOT_PSPBOOTACKWAIT_DONE","Waiting for PSP Boot Acknowledge finished, APU <-> SB communication failed on SMBUS3, no PSP boot acknowledge, check R4D31, R4D38. Cause can be APU not receiving PWROK from SB (Check R5R5, R5R6), Check V_SOC1P8VDD (FB6D1), reball APU, APU."
+"XOP","SMC","0xEB41",,1,"BOOT_PSPBOOTACKWAIT_DONE","Waiting for PSP Boot Acknowledge finished, APU <-> SB communication failed on SMBUS3, no PSP boot acknowledge, check R4D31, R4D38. V_FUSE/V_SOC1P8 unavailable, check resistance and voltage on both, if missing U5C3 or U6D1 related. Cause can be APU not receiving PWROK from SB (Check R5R5, R5R6), Check V_SOC1P8VDD (FB6D1), reball APU, APU."
 "XOP","SMC","0xEB42",,1,"BOOT_PSPPORSPEWWAIT_DONE","PSP Power-On Reset spew wait done, unable to unreset APU, APU stuck in reset -> Check R5R9, R5T10, reball APU, APU."
 "XOP","SMC","0xEB43",,1,"BOOT_SOCUNRESETWAIT_DONE","SOC unreset wait complete"
 "XOP","SMC","0xEB44",,1,"BOOT_SOCFLASHACCWAIT","SOC flash access wait done"
@@ -61,7 +61,7 @@
 "XOS","SMC","0xE003",,1,"FATAL_PWRGPA","PWRGPA timeout / not reporting PWRGD -> Check U9F1, R6T4, Q9F1, Q9F2, surrounding resistors/capacitors. V_Memio or V_VTTB short ?"
 "XOS","SMC","0xE004",,1,"FATAL_SBPOWERUP2",
 "XOS","SMC","0xE005",,1,"FATAL_PWRGPB","PWRGPB timeout / not reporting PWRGD -> Check short on V_SOCPHY, V_NBCORE (can be low resistance, dont confuse with a short!). Pull VREG_PWRGPB_EN to V_3P3STBY manually and check V_SOCPHY, V_NBCORE voltages. R5U9, U5F5, U5F3, Q6F1, Q6F2, surrounding caps and resistors."
-"XOS","SMC","0xE006",,1,"FATAL_CPUGFX","CPUGFX_PWRGD timeout / not reporting PWRGD -> Check short on V_CPUCORE, V_GFXCORE (overcurrentshutdown) (they can be low resistance, dont confuse with a short!), check  drivers, mosfets and U9C2."
+"XOS","SMC","0xE006",,1,"FATAL_CPUGFX","CPUGFX_PWRGD timeout / not reporting PWRGD -> Check short on V_CPUCORE, V_GFXCORE (overcurrentshutdown) (they can be low resistance, dont confuse with a short!), check drivers U9D2, U9E1, U9E2, all 6 mosfets, surrounding resistors and U9C2."
 "XOS","SMC","0xE007",,1,"FATAL_FAN_STARTUP",
 "XOS","SMC","0xE008",,1,"FATAL_SBPOWERUP1","Wait for `SBPowerUp1(0)` to complete"
 "XOS","SMC","0xE009",,1,"FATAL_09",
@@ -77,12 +77,12 @@
 "XOS","SMC","0xE086",,1,"FATAL_CPUGFX_FAILURE","Thrown when console unplugged unexpectedly. CPUGFX_PWRGD failed while on, check output capacitors for V_CPUCORE, V_GFXCORE (C8D1, C8D2, C8D3, C8E1, C8E2, C8E3)"
 "XOS","SMC","0xE089",,1,"FATAL_NBCORE","U5F3 I2C unreachable -> Check surrounding traces, replace U5F3 "
 "XOS","SMC","0xEB40",,1,"BOOT_SBUNRESETWAIT","V_SB1P1, V_SB1P8 timeout, unable to unreset southbridge. Check short on V_SB1P1, V_SB1P8, check U3E1 or U3F1 or surrounding resistors"
-"XOS","SMC","0xEB41",,1,"BOOT_PSPBOOTACKWAIT_DONE","APU <-> SB communication failed on SMBUS3, no PSP boot acknowledge (R3T1, R3T2, R5T5, R5T6, R4E29, R4E28), can be caused by: V_FUSE/V_SOC1P8 unavailable -> Check R5D10, U5D3, R5D9, D5D2, D5D1, R5R11, R5R10, U5D2, R6D6, R5D6, seen with low V3P3, possible V_3P3_ENET short. Can be APU not receiving PWROK from SB (Check R5T29, R5T28)Check V_SOC1P8VDD (FB6D1), APU."
+"XOS","SMC","0xEB41",,1,"BOOT_PSPBOOTACKWAIT_DONE","APU <-> SB communication failed on SMBUS3, no PSP boot acknowledge (R3T1, R3T2, R5T5, R5T6, R4E29, R4E28), can be caused by: V_FUSE/V_SOC1P8 unavailable -> Check R5D10, U5D3, R5D9, D5D2, D5D1, R5R11, R5R10, U5D2, R6D6, R5D6, seen with low V3P3, possible V_3P3_ENET short. Can be APU not receiving PWROK from SB (Check R5T29, R5T28)Check V_SOC1P8VDD (FB6D1), reball APU, APU."
 "XOS","SMC","0xEB42",,1,"BOOT_PSPPORSPEWWAIT_DONE","PSP Power-On Reset spew wait done, unable to unreset APU, APU stuck in reset -> Check R5T31, R5T13, APU."
 "XOS","SMC","0xEB43",,1,"BOOT_SOCUNRESETWAIT_DONE","SOC unreset wait complete"
 "XOS","SMC","0xEB44",,1,"BOOT_SOCFLASHACCWAIT","SOC flash access wait done"
 "XOS","SMC","0xEB45",,1,"BOOT_SOCPOST_DONE","SOC POST (Power-On Self-Test) wait done"
-"XOS","SMC","0xEB46",,1,"BOOT_XSS_TIMEOUT_46","XSS wait timeout (SOC not responding) - error fallback 0xeb46 right AFTER 0x007x - VTT[ABCD]/V_Memio timeout, check resistances & voltage. 0xeb46 right AFTER 0x04c5 - V3P3 unavailable, check short, check U5D4, C5D5, R9C31, R5D11, R5D13. 0xeb46 right AFTER 0x045x - APU <-> VRM CONTROLLER SVI2 communication attempt failed. Check resistance on V_Memio (shows dead soc). Check R9D3, R2R2, R2R1, R9C23, R1P21, replace ncp, APU."
+"XOS","SMC","0xEB46",,1,"BOOT_XSS_TIMEOUT_46","XSS wait timeout (SOC not responding) - error fallback 0xeb46 right AFTER 0x007x - VTT[ABCD]/V_Memio timeout, check resistances & voltage. 0xeb46 right AFTER 0x04c5 - V3P3 unavailable, check short, check U5D4, C5D5, R9C31, R5D11, R5D13. 0xeb46 right AFTER 0x045x - APU <-> VRM CONTROLLER SVI2 communication attempt failed. check resistance on all apu rails, can show partial dead core (V_Memio?). Check R9D3, R2R2, R2R1, R9C23, R1P21, replace ncp, APU."
 "XOS","SMC","0xEB47",,1,"BOOT_XSS_TIMEOUT_47","XSS wait timeout fallback path (word_20000090 nonzero)"
 "XOS","SMC","0xEB48",,1,"BOOT_SOCPOWEROK_DONE","SOC power OK complete"
 "XOS","SMC","0xEB49",,1,"BOOT_COND_EARLY_ABORT","Conditional POST on XSSActiveWait() return < 0 - XSS wait failed - early abort"
@@ -338,3 +338,4 @@
 "ALL","CPU","0x00f6","0x00FF",0,"TpIfBeforeLocateS3CMsrBuffer","Before the memory code calls out to locate a buffer"
 "ALL","CPU","0x00f7","0x00FF",0,"TpIfAfterLocateS3CMsrBuffer","After the memory code calls out to locate a buffer"
 "ALL","CPU","0x00f8","0x00FF",0,"TpPerfUnit","The Unit of performance measure."
+"ALL","CPU","0x00ff","0x00FF",0,"SUCCESS"
