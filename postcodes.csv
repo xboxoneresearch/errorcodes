@@ -1,58 +1,116 @@
 "Console","Type","Code","Bitmask","IsError","Name","Description"
-"ALL","SMC","0xE001",,1,"FATAL_V12","V_12P0 not available / not detected / timeout. -> Check short on V_12P0, check powersupply, check V_EXT (R5R20, R5R19), check PSU_V12P0_EN (R9A2, R9B2)"
-"ALL","SMC","0xE002",,1,"FATAL_V5","V_5P0 not available / timeout. -> Check short on V_5P0, check U3E2, Q3E1, Q3E2 and surrounding resistors."
-"ALL","SMC","0xE003",,1,"FATAL_PWRGPA","PWRGPA timeout / not reporting PWRGD -> Check short on V_3P3, V_SOC1P8PLL, VMEMIOAB/CD, VTT[ABCD]. Pull VREG_PWRGPA_EN to V_3P3STBY manually and check V_3P3, V_SOC1P8PLL, VMEMIOAB/CD, (VTT[ABCD]) voltages."
-"ALL","SMC","0xE004",,1,"FATAL_SBPOWERUP2",
-"ALL","SMC","0xE005",,1,"FATAL_PWRGPB","PWRGPB timeout / not reporting PWRGD -> Check short on V_FUSE, V_SOCPHY, V_NBCORE, V_MEMCORE. Pull VREG_PWRGPB_EN to V_3P3STBY manually and check V_FUSE, V_SOCPHY, V_NBCORE, V_MEMCORE voltages."
-"ALL","SMC","0xE006",,1,"FATAL_CPUGFX","CPUGFX_PWRGD timeout / not reporting PWRGD -> Check short on V_CPUCORE, V_GFXCORE (they can be low resistance, dont confuse with a short!), check R9C64, U9D2, U9D3, U9D4, U9E1, U9E2 drivers, mosfets and U9C2."
-"ALL","SMC","0xE007",,1,"FATAL_FAN_STARTUP",
-"ALL","SMC","0xE008",,1,"FATAL_SBPOWERUP1","Wait for `SBPowerUp1(0)` to complete"
-"ALL","SMC","0xE009",,1,"FATAL_09",
-"ALL","SMC","0xE00A",,1,"FATAL_FAN_RUN",
-"ALL","SMC","0xE010",,1,"FATAL_POWER_STABILIZE_RETRY","SOC voltage low / unstable. check capacitors, Diagnose CPU/GFX curcuit"
-"ALL","SMC","0xE011",,1,"THERMAL_OVERTEMP_THRESHOLD",
-"ALL","SMC","0xE042",,1,"FATAL_V_5P0_I2C_UNREACHABLE","U3E2 I2C unreachable -> Check surrounding traces, replace U3E2"
-"ALL","SMC","0xE046",,1,"FATAL_GFXCPU_I2C_UNREACHABLE","NCP4204 I2C unreachable -> Check R9C1, R9C2, surrounding traces, replace U9C2"
-"ALL","SMC","0xE04A",,1,"FATAL_MEMIOAB","U9F2 I2C unreachable -> Check surrounding traces, replace U9F2"
-"ALL","SMC","0xE04B",,1,"FATAL_MEMIOCD","U6C1 I2C unreachable -> Check surrounding traces, replace U6C1"
-"ALL","SMC","0xE081",,1,"FATAL_V12_HW_FAILURE","Thrown when disconnecting powersupply while console is on, check powersupply"
-"ALL","SMC","0xE082",,1,"FATAL_V5_HW_FAILURE","Thrown when disconnecting powersupply while console is on, check powersupply"
-"ALL","SMC","0xE083",,1,"FATAL_PWRGPA_HW_FAILURE","VREG_PWRGPA_PWRGD went low while console was on, V_3P3, V_SOC1P8PLL, VMEMIOAB/CD, VTT[ABCD] unstable"
-"ALL","SMC","0xE084",,1,"FATAL_SBPOWERUP2_HW_FAILURE","SBPOWERUP2 failed while console is on, unstable"
-"ALL","SMC","0xE085",,1,"FATAL_PWRGPB_FAILURE","VREG_PWRGPA_PWRGD went low while console was on, V_FUSE, V_SOCPHY, V_NBCORE, V_MEMCORE unstable"
-"ALL","SMC","0xE086",,1,"FATAL_CPUGFX","CPUGFX_PWRGD went low while console was on, CPU/GFX related"
-"ALL","SMC","0xE089",,1,"FATAL_NBCORE","U6C1 I2C unreachable -> Check surrounding traces, replace U6C1"
-"ALL","SMC","0xEB40",,1,"BOOT_SBUNRESETWAIT","V_SB2P5, V_SB1P1, V_SB1P8 timeout, unable to unreset southbridge. Check short on V_SB2P5, V_SB1P1, V_SB1P8, replace U3D3, U3E1 or U3D5 or surrounding resistors, southbridge"
-"ALL","SMC","0xEB41",,1,"BOOT_PSPBOOTACKWAIT_DONE","Waiting for PSP Boot Acknowledge finished, APU <-> SB communication failed on SMBUS3, no PSP boot acknowledge, check R4D31, R4D38. Cause can be APU not receiving PWROK from SB (Check R5R5, R5R6), Check V_SOC1P8VDD (FB6D1), APU."
-"ALL","SMC","0xEB42",,1,"BOOT_PSPPORSPEWWAIT_DONE","PSP Power-On Reset spew wait done, unable to unreset APU, APU stuck in reset -> Check R5R9, R5T10, APU."
-"ALL","SMC","0xEB43",,1,"BOOT_SOCUNRESETWAIT_DONE","SOC unreset wait complete"
-"ALL","SMC","0xEB44",,1,"BOOT_SOCFLASHACCWAIT","SOC flash access wait done"
-"ALL","SMC","0xEB45",,1,"BOOT_SOCPOST_DONE","SOC POST (Power-On Self-Test) wait done"
-"ALL","SMC","0xEB46",,1,"BOOT_XSS_TIMEOUT_46","XSS wait timeout (SOC not responding) - error fallback"
-"ALL","SMC","0xEB47",,1,"BOOT_XSS_TIMEOUT_47","XSS wait timeout fallback path (word_20000090 nonzero)"
-"ALL","SMC","0xEB48",,1,"BOOT_SOCPOWEROK_DONE","SOC power OK complete"
-"ALL","SMC","0xEB49",,1,"BOOT_COND_EARLY_ABORT","Conditional POST on XSSActiveWait() return < 0 - XSS wait failed - early abort"
-"ALL","SMC","0xEA01",,1,"RESET_PSPACK_MISSING","Unexpected PSP Boot Ack not received"
-"ALL","SMC","0xEA02",,1,"RESET_FATAL_THERMAL_PENDING","Fatal or thermal error pending during wait"
-"ALL","SMC","0xEA03",,1,"RESET_TIMEOUT","Reset wait timeout"
-"ALL","SMC","0xEA04",,1,"RESET_PIMACK_FAIL","HandlePIMBootAck or response fails"
-"ALL","SMC","0xEA05",,1,"RESET_PIM_BOOT_INCOMPLETE","PIM boot ack or early boot signal incomplete"
-"ALL","SMC","0xEA06",,1,"RESET_BITMASK_INVALID","Bitmask condition not met (& 5 == 0)"
-"ALL","SMC","0xEAFF",,1,"RESET_INVALID_STATE","Invalid state detected"
-"ALL","SMC","0xEC01",,1,"RUNTIME_GET_SOCSyncFLOOD_STATE","Triggered if SOC_SyncFlood() returns true"
-"ALL","SMC","0xEC02",,1,"RUNTIME","Happens if sub_10001532 fails after repeated attempts maybe Timeout waiting for PCIe device"
-"ALL","SMC","0xEC03",,1,"RUNTIME","PLL_Clk_Maybe() failed, likely clock not stable"
-"ALL","SMC","0xEC04",,1,"RUNTIME_EXTPOST",
-"ALL","SMC","0xEC05",,1,"RUNTIME_05",
-"ALL","SMC","0xEC06",,1,"RUNTIME_06",
-"ALL","SMC","0xEC07",,1,"RUNTIME_07",
-"ALL","SMC","0xEC09",,1,"RUNTIME_GET_SBSystemSubmode","Final PCIe init or handshake failure"
-"ALL","SMC","0xEC0B",,1,"RUNTIME_I2C_CLEARMSG",
-"ALL","SMC","0xEC0E",,1,"RUNTIME_TIMEOUT",
-"ALL","SMC","0xE421",,1,"THERMAL_22","APU to SB: Thermal trip -> Check R5R8, R5R7, traces, reball southbridge or apu, apu tempsensor fault. Is the console just overheating?"
-"ALL","SMC","0xE422",,1,"THERMAL_22",
-"ALL","SMC","0xE423",,1,"THERMAL_23",
-"ALL","SMC","0xE424",,1,"THERMAL_24",
+"XOP","SMC","0xE001",,1,"FATAL_V12","V_12P0 not available / not detected / timeout. -> Check short on V_12P0, check powersupply, check V_EXT (R5R20, R5R19), check PSU_V12P0_EN (R9A2, R9B2)"
+"XOP","SMC","0xE002",,1,"FATAL_V5","V_5P0 not available / timeout. -> Check short on V_5P0, check U3E2, Q3E1, Q3E2 and surrounding resistors."
+"XOP","SMC","0xE003",,1,"FATAL_PWRGPA","PWRGPA timeout / not reporting PWRGD -> Check short on V_3P3, V_SOC1P8PLL, VMEMIOAB/CD, VTT[ABCD]. Pull VREG_PWRGPA_EN to V_3P3STBY manually and check V_3P3, V_SOC1P8PLL, VMEMIOAB/CD, (VTT[ABCD]) voltages."
+"XOP","SMC","0xE004",,1,"FATAL_SBPOWERUP2",
+"XOP","SMC","0xE005",,1,"FATAL_PWRGPB","PWRGPB timeout / not reporting PWRGD -> Check short on V_SOCPHY, V_NBCORE, V_MEMCORE. Pull VREG_PWRGPB_EN to V_3P3STBY manually and check V_FUSE, V_SOCPHY, V_NBCORE, V_MEMCORE voltages."
+"XOP","SMC","0xE006",,1,"FATAL_CPUGFX","CPUGFX_PWRGD timeout / not reporting PWRGD -> Check short on V_CPUCORE, V_GFXCORE (they can be low resistance, dont confuse with a short!), check R9C64, U9D2, U9D3, U9D4, U9E1, U9E2 drivers, 10 mosfets, surrounding resistors and U9C2."
+"XOP","SMC","0xE007",,1,"FATAL_FAN_STARTUP",
+"XOP","SMC","0xE008",,1,"FATAL_SBPOWERUP1","Wait for `SBPowerUp1(0)` to complete"
+"XOP","SMC","0xE009",,1,"FATAL_09",
+"XOP","SMC","0xE00A",,1,"FATAL_FAN_RUN",
+"XOP","SMC","0xE010",,1,"FATAL_POWER_STABILIZE_RETRY","Voltage low / unstable. check capacitors"
+"XOP","SMC","0xE011",,1,"THERMAL_OVERTEMP_THRESHOLD","Overtemperature unknown"
+"XOP","SMC","0xE042",,1,"FATAL_V_5P0_I2C_UNREACHABLE","U3E2 I2C unreachable -> Check surrounding traces, replace U3E2"
+"XOP","SMC","0xE046",,1,"FATAL_GFXCPU_I2C_UNREACHABLE","NCP4204 I2C unreachable -> Check R9C1, R9C2, surrounding traces, replace U9C2"
+"XOP","SMC","0xE04A",,1,"FATAL_MEMIOAB","U9F2 I2C unreachable -> Check surrounding traces, replace U9F2"
+"XOP","SMC","0xE04B",,1,"FATAL_MEMIOCD","U6C1 I2C unreachable -> Check surrounding traces, replace U6C1"
+"XOP","SMC","0xE081",,1,"FATAL_V12_HW_FAILURE","Thrown when console unplugged unexpectedly, check powersupply. 12V unstable, maybe V_EXT (R5R20, R5R19), check PSU_V12P0_EN (R9A2, R9B2)"
+"XOP","SMC","0xE082",,1,"FATAL_V5_HW_FAILURE","Thrown when console unplugged unexpectedly, check powersupply. Unstable V_5P0, check C3E15."
+"XOP","SMC","0xE083",,1,"FATAL_PWRGPA_HW_FAILURE","Thrown when console unplugged unexpectedly, VREG_PWRGPA_PWRGD went low while console was on, V_3P3, V_SOC1P8PLL, VMEMIOAB/CD, VTT[ABCD] unstable. Check C4F21, C9E11 and C6C14."
+"XOP","SMC","0xE084",,1,"FATAL_SBPOWERUP2_HW_FAILURE","Thrown when console unplugged unexpectedly, SBPOWERUP2 failed while console is on, unstable"
+"XOP","SMC","0xE085",,1,"FATAL_PWRGPB_FAILURE","Thrown when console unplugged unexpectedly, VREG_PWRGPB_PWRGD went low while console was on, V_FUSE, V_SOCPHY, V_NBCORE or V_MEMCORE unstable. Check C6F9, C6F12 and C6E15."
+"XOP","SMC","0xE086",,1,"FATAL_CPUGFX_FAILURE","Thrown when console unplugged unexpectedly, CPUGFX_PWRGD went low while console was on. Check output filtering C8D1, C8D2, C8D4, C8E1, C8E5, C8E8, C8E10. General corrosion / timing problem in NCP area?"
+"XOP","SMC","0xE089",,1,"FATAL_NBCORE","U5F3 I2C unreachable -> Check surrounding traces, replace U5F3"
+"XOP","SMC","0xEB40",,1,"BOOT_SBUNRESETWAIT","V_SB2P5, V_SB1P1, V_SB1P8 timeout, unable to unreset southbridge. Check short on V_SB2P5, V_SB1P1, V_SB1P8, replace U3D3, U3E1 or U3D5 or surrounding resistors, southbridge"
+"XOP","SMC","0xEB41",,1,"BOOT_PSPBOOTACKWAIT_DONE","Waiting for PSP Boot Acknowledge finished, APU <-> SB communication failed on SMBUS3, no PSP boot acknowledge, check R4D31, R4D38. V_FUSE/V_SOC1P8 unavailable, check resistance and voltage on both, if missing U5C3 or U6D1 related. Cause can be APU not receiving PWROK from SB (Check R5R5, R5R6), Check V_SOC1P8VDD (FB6D1), reball APU, APU."
+"XOP","SMC","0xEB42",,1,"BOOT_PSPPORSPEWWAIT_DONE","PSP Power-On Reset spew wait done, unable to unreset APU, APU stuck in reset -> Check R5R9, R5T10, reball APU, APU."
+"XOP","SMC","0xEB43",,1,"BOOT_SOCUNRESETWAIT_DONE","SOC unreset wait complete"
+"XOP","SMC","0xEB44",,1,"BOOT_SOCFLASHACCWAIT","SOC flash access wait done"
+"XOP","SMC","0xEB45",,1,"BOOT_SOCPOST_DONE","SOC POST (Power-On Self-Test) wait done"
+"XOP","SMC","0xEB46",,1,"BOOT_XSS_TIMEOUT_46","XSS wait timeout (SOC not responding) - error fallback 0xeb46 right AFTER 0x007x - VTT[ABCD]/V_Memio timeout, check resistances & voltage. 0xeb46 right AFTER 0x045x - APU <-> VRM CONTROLLER SVI2 communication attempt failed. Check R9C4, R2R2, R2R3, replace ncp, reball APU, APU."
+"XOP","SMC","0xEB47",,1,"BOOT_XSS_TIMEOUT_47","XSS wait timeout fallback path (word_20000090 nonzero)"
+"XOP","SMC","0xEB48",,1,"BOOT_SOCPOWEROK_DONE","SOC power OK complete"
+"XOP","SMC","0xEB49",,1,"BOOT_COND_EARLY_ABORT","Conditional POST on XSSActiveWait() return < 0 - XSS wait failed - early abort"
+"XOP","SMC","0xEB4C",,1,"BOOT_FAIL_UNKNOWN","seen with V_3P3_ENET short, late V3P3 shutdown or low? "
+"XOP","SMC","0xEA01",,1,"RESET_PSPACK_MISSING","Unexpected PSP Boot Ack not received"
+"XOP","SMC","0xEA02",,1,"RESET_FATAL_THERMAL_PENDING","Fatal or thermal error pending during wait"
+"XOP","SMC","0xEA03",,1,"RESET_TIMEOUT","Reset wait timeout"
+"XOP","SMC","0xEA04",,1,"RESET_PIMACK_FAIL","HandlePIMBootAck or response fails"
+"XOP","SMC","0xEA05",,1,"RESET_PIM_BOOT_INCOMPLETE","PIM boot ack or early boot signal incomplete"
+"XOP","SMC","0xEA06",,1,"RESET_BITMASK_INVALID","Bitmask condition not met (& 5 == 0)"
+"XOP","SMC","0xEAFF",,1,"RESET_INVALID_STATE","Invalid state detected"
+"XOP","SMC","0xEC01",,1,"RUNTIME_GET_SOCSyncFLOOD_STATE","Triggered if SOC_SyncFlood() returns true"
+"XOP","SMC","0xEC02",,1,"RUNTIME","Happens if sub_10001532 fails after repeated attempts maybe Timeout waiting for PCIe device"
+"XOP","SMC","0xEC03",,1,"RUNTIME","PLL_Clk_Maybe() failed, likely clock not stable"
+"XOP","SMC","0xEC04",,1,"RUNTIME_EXTPOST","General Error - Often byproduct, low priority"
+"XOP","SMC","0xEC05",,1,"RUNTIME_05","General Error - Often byproduct, low priority"
+"XOP","SMC","0xEC06",,1,"RUNTIME_06","General Error - Often byproduct, low priority"
+"XOP","SMC","0xEC07",,1,"RUNTIME_07",
+"XOP","SMC","0xEC09",,1,"RUNTIME_GET_SBSystemSubmode","Final PCIe init or handshake failure"
+"XOP","SMC","0xEC0B",,1,"RUNTIME_I2C_CLEARMSG","I2C bus failed to clear. Pi pico hickup, check all I2C devices (Frontpanel, U5F3, U3E2, U6C1, U9C2, U9F2), southbridge."
+"XOP","SMC","0xEC0E",,1,"RUNTIME_TIMEOUT",
+"XOP","CPU","0x0C80",,1,"2BL_PSQ_MISSMATCH","Possible EMMC corruption, thrown when not matching firmware version in EMMC"
+"XOP","SMC","0xE421",,1,"THERMAL_22","APU to SB: Thermal trip -> Check R5R8, R5R7, traces, reball southbridge or apu, apu tempsensor fault. Is the console just overheating?"
+"XOP","SMC","0xE422",,1,"THERMAL_22",
+"XOP","SMC","0xE423",,1,"THERMAL_23",
+"XOP","SMC","0xE424",,1,"THERMAL_24",
+"XOP","CPU","0x9184",,1,"MEMORY_OG","General memory error (MEM <-> APU), check V_Memio / VTT A-D resistances&voltages, check resistors around rams, replace rams (ZQ method?), reball apu."
+"XOS","SMC","0xE001",,1,"FATAL_V12","V_12P0_GATED not available / not detected / timeout. -> Check short on V_12P0_GATED, check V_EXT (R5T18, R5T26), Q9D1, R9C24, Q1P2"
+"XOS","SMC","0xE002",,1,"FATAL_OLD5","Ignore"
+"XOS","SMC","0xE003",,1,"FATAL_PWRGPA","PWRGPA timeout / not reporting PWRGD -> Check U9F1, R6T4, Q9F1, Q9F2, surrounding resistors/capacitors. V_Memio or V_VTTB short ?"
+"XOS","SMC","0xE004",,1,"FATAL_SBPOWERUP2",
+"XOS","SMC","0xE005",,1,"FATAL_PWRGPB","PWRGPB timeout / not reporting PWRGD -> Check short on V_SOCPHY, V_NBCORE (can be low resistance, dont confuse with a short!). Pull VREG_PWRGPB_EN to V_3P3STBY manually and check V_SOCPHY, V_NBCORE voltages. R5U9, U5F5, U5F3, Q6F1, Q6F2, surrounding caps and resistors."
+"XOS","SMC","0xE006",,1,"FATAL_CPUGFX","CPUGFX_PWRGD timeout / not reporting PWRGD -> Check short on V_CPUCORE, V_GFXCORE (overcurrentshutdown) (they can be low resistance, dont confuse with a short!), check drivers U9D2, U9E1, U9E2, all 6 mosfets, surrounding resistors and U9C2."
+"XOS","SMC","0xE007",,1,"FATAL_FAN_STARTUP",
+"XOS","SMC","0xE008",,1,"FATAL_SBPOWERUP1","Wait for `SBPowerUp1(0)` to complete"
+"XOS","SMC","0xE009",,1,"FATAL_09",
+"XOS","SMC","0xE00A",,1,"FATAL_FAN_RUN",
+"XOS","SMC","0xE010",,1,"FATAL_POWER_STABILIZE_RETRY","Voltage low / unstable. check capacitors"
+"XOS","SMC","0xE011",,1,"THERMAL_OVERTEMP_THRESHOLD","Overtemperature unknown"
+"XOS","SMC","0xE046",,1,"FATAL_GFXCPU_I2C_UNREACHABLE","NCP4204 I2C unreachable -> Check R9C29, R9C30, surrounding traces, check V_5P0_GATED available? (R9D30, Q8D1), replace U9C2"
+"XOS","SMC","0xE081",,1,"FATAL_V12_HW_FAILURE","Thrown when console unplugged unexpectedly. -> V_12P0_GATED failed while on, check V_EXT (R5T18, R5T26), Q9D1, R9C24, check powersupply"
+"XOS","SMC","0xE082",,1,"FATAL_HW_FAILURE_OLD5","Thrown when console unplugged unexpectedly. Ignore"
+"XOS","SMC","0xE083",,1,"FATAL_PWRGPA_HW_FAILURE","Thrown when console unplugged unexpectedly. PWGRPA failed while on, check output capacitors for V_Memio (C9E8)."
+"XOS","SMC","0xE084",,1,"FATAL_SBPOWERUP2_HW_FAILURE","Thrown when console unplugged unexpectedly. SBPOWERUP2 failed while console is on, unstable"
+"XOS","SMC","0xE085",,1,"FATAL_PWRGPB_FAILURE","Thrown when console unplugged unexpectedly. PWGRPB failed while on, check output capacitors for V_SOCPHY (C5F5, C5F6), V_NBCORE (C5E10, C5E11). "
+"XOS","SMC","0xE086",,1,"FATAL_CPUGFX_FAILURE","Thrown when console unplugged unexpectedly. CPUGFX_PWRGD failed while on, check output capacitors for V_CPUCORE, V_GFXCORE (C8D1, C8D2, C8D3, C8E1, C8E2, C8E3)"
+"XOS","SMC","0xE089",,1,"FATAL_NBCORE","U5F3 I2C unreachable -> Check surrounding traces, replace U5F3 "
+"XOS","SMC","0xEB40",,1,"BOOT_SBUNRESETWAIT","V_SB1P1, V_SB1P8 timeout, unable to unreset southbridge. Check short on V_SB1P1, V_SB1P8, check U3E1 or U3F1 or surrounding resistors"
+"XOS","SMC","0xEB41",,1,"BOOT_PSPBOOTACKWAIT_DONE","APU <-> SB communication failed on SMBUS3, no PSP boot acknowledge (R3T1, R3T2, R5T5, R5T6, R4E29, R4E28), can be caused by: V_FUSE/V_SOC1P8 unavailable -> Check R5D10, U5D3, R5D9, D5D2, D5D1, R5R11, R5R10, U5D2, R6D6, R5D6, seen with low V3P3, possible V_3P3_ENET short. Can be APU not receiving PWROK from SB (Check R5T29, R5T28)Check V_SOC1P8VDD (FB6D1), reball APU, APU."
+"XOS","SMC","0xEB42",,1,"BOOT_PSPPORSPEWWAIT_DONE","PSP Power-On Reset spew wait done, unable to unreset APU, APU stuck in reset -> Check R5T31, R5T13, APU."
+"XOS","SMC","0xEB43",,1,"BOOT_SOCUNRESETWAIT_DONE","SOC unreset wait complete"
+"XOS","SMC","0xEB44",,1,"BOOT_SOCFLASHACCWAIT","SOC flash access wait done"
+"XOS","SMC","0xEB45",,1,"BOOT_SOCPOST_DONE","SOC POST (Power-On Self-Test) wait done"
+"XOS","SMC","0xEB46",,1,"BOOT_XSS_TIMEOUT_46","XSS wait timeout (SOC not responding) - error fallback 0xeb46 right AFTER 0x007x - VTT[ABCD]/V_Memio timeout, check resistances & voltage. 0xeb46 right AFTER 0x04c5 - V3P3 unavailable, check short, check U5D4, C5D5, R9C31, R5D11, R5D13. 0xeb46 right AFTER 0x045x - APU <-> VRM CONTROLLER SVI2 communication attempt failed. check resistance on all apu rails, can show partial dead core (V_Memio?). Check R9D3, R2R2, R2R1, R9C23, R1P21, replace ncp, APU."
+"XOS","SMC","0xEB47",,1,"BOOT_XSS_TIMEOUT_47","XSS wait timeout fallback path (word_20000090 nonzero)"
+"XOS","SMC","0xEB48",,1,"BOOT_SOCPOWEROK_DONE","SOC power OK complete"
+"XOS","SMC","0xEB49",,1,"BOOT_COND_EARLY_ABORT","Conditional POST on XSSActiveWait() return < 0 - XSS wait failed - early abort"
+"XOS","SMC","0xEB4C",,1,"BOOT_FAIL_UNKNOWN","seen with V_3P3_ENET short, late V3P3 shutdown or low? "
+"XOS","SMC","0xEA01",,1,"RESET_PSPACK_MISSING","Unexpected PSP Boot Ack not received"
+"XOS","SMC","0xEA02",,1,"RESET_FATAL_THERMAL_PENDING","Fatal or thermal error pending during wait"
+"XOS","SMC","0xEA03",,1,"RESET_TIMEOUT","Reset wait timeout"
+"XOS","SMC","0xEA04",,1,"RESET_PIMACK_FAIL","HandlePIMBootAck or response fails"
+"XOS","SMC","0xEA05",,1,"RESET_PIM_BOOT_INCOMPLETE","PIM boot ack or early boot signal incomplete"
+"XOS","SMC","0xEA06",,1,"RESET_BITMASK_INVALID","Bitmask condition not met (& 5 == 0)"
+"XOS","SMC","0xEAFF",,1,"RESET_INVALID_STATE","Invalid state detected"
+"XOS","SMC","0xEC01",,1,"RUNTIME_GET_SOCSyncFLOOD_STATE","Triggered if SOC_SyncFlood() returns true"
+"XOS","SMC","0xEC02",,1,"RUNTIME","Happens if sub_10001532 fails after repeated attempts maybe Timeout waiting for PCIe device"
+"XOS","SMC","0xEC03",,1,"RUNTIME","PLL_Clk_Maybe() failed, likely clock not stable"
+"XOS","SMC","0xEC04",,1,"RUNTIME_EXTPOST","General Error - Often byproduct, low priority"
+"XOS","SMC","0xEC05",,1,"RUNTIME_05","General Error - Often byproduct, low priority"
+"XOS","SMC","0xEC06",,1,"RUNTIME_06","General Error - Often byproduct, low priority"
+"XOS","SMC","0xEC07",,1,"RUNTIME_07",
+"XOS","SMC","0xEC09",,1,"RUNTIME_GET_SBSystemSubmode","Final PCIe init or handshake failure"
+"XOS","SMC","0xEC0B",,1,"RUNTIME_I2C_CLEARMSG","0xec0b - I2C bus failed to clear. Pi pico hickup, check all I2C devices (U5F3, U9C2), southbridge."
+"XOS","SMC","0xEC0E",,1,"RUNTIME_TIMEOUT",
+"XOS","CPU","0x0C80",,1,"2BL_PSQ_MISSMATCH","Possible EMMC corruption, thrown when not matching firmware version in EMMC"
+"XOS","SMC","0xE421",,1,"THERMAL_22","APU to SB: Thermal trip -> Can be caused by missing V_SOC1P8, check U5D2, R6D6, R5D6. Check R5T27, R5T3, R5E12, R5T7, R5E11, U5E2, R5E9, R5E8, R5T42, apu tempsensor fault. Is the apu just too hot? "
+"XOS","SMC","0xE422",,1,"THERMAL_22",
+"XOS","SMC","0xE423",,1,"THERMAL_23",
+"XOS","SMC","0xE424",,1,"THERMAL_24",
+"XOS","SMC","0x9134",,1,"MEMORY_S","General memory error (MEM <-> APU), check V_Memio / VTT A-D resistances&voltages, check resistors around rams, replace rams (ZQ method?), reball apu."
+"XOS","CPU","0x05f9",,0,"MEMORY_S_BYP","Thrown with memory error on ONE S"
 "ALL","SP","0x0075",,0,"BOOT_SUCCESS",
 "ALL","CPU","0x14FF",,0,"BOOT_SUCCESS",
 "ALL","CPU","0x0100","0xFF00",0,"2BL_UNKNOWN",
@@ -280,4 +338,4 @@
 "ALL","CPU","0x00f6","0x00FF",0,"TpIfBeforeLocateS3CMsrBuffer","Before the memory code calls out to locate a buffer"
 "ALL","CPU","0x00f7","0x00FF",0,"TpIfAfterLocateS3CMsrBuffer","After the memory code calls out to locate a buffer"
 "ALL","CPU","0x00f8","0x00FF",0,"TpPerfUnit","The Unit of performance measure."
-"ALL","CPU","0x00ff","0x00FF",0,"SUCCESS",
+"ALL","CPU","0x00ff","0x00FF",0,"SUCCESS","SUCCESS"
