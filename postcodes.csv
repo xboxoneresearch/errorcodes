@@ -338,4 +338,4 @@
 "ALL","CPU","0x00f6","0x00FF",0,"TpIfBeforeLocateS3CMsrBuffer","Before the memory code calls out to locate a buffer"
 "ALL","CPU","0x00f7","0x00FF",0,"TpIfAfterLocateS3CMsrBuffer","After the memory code calls out to locate a buffer"
 "ALL","CPU","0x00f8","0x00FF",0,"TpPerfUnit","The Unit of performance measure."
-"ALL","CPU","0x00ff","0x00FF",0,"SUCCESS"
+"ALL","CPU","0x00ff","0x00FF",0,"SUCCESS","SUCCESS"
