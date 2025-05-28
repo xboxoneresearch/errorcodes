@@ -340,7 +340,7 @@
                 const tr = document.createElement('tr');
                 const consoles = Array.isArray(row.console) ? row.console : [row.console];
                 const consoleBadges = consoles.map(console => 
-                    `<span class="console-badge ${console}" title="${CONSOLE_NAMES[console]}">${CONSOLE_NAMES[console]}</span>`
+                    `<span class="console-badge ${console}" title="${CONSOLE_NAMES[console]}"><nobr>${CONSOLE_NAMES[console]}</nobr></span>`
                 ).join('');
                 
                 const codeType = row.type;
