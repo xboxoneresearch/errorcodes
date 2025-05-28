@@ -343,6 +343,9 @@
                     `<span class="console-badge ${console}" title="${CONSOLE_NAMES[console]}">${CONSOLE_NAMES[console]}</span>`
                 ).join('');
                 
+                const codeType = row.type;
+                const codeTypeBadge = `<span class="codetype-badge ${codeType}" title="${codeType}">${codeType}</span>`;
+
                 // Format code with bitmask if present
                 const codeDisplay = row.bitmask !== null 
                     ? `${row.code} (${row.bitmask.toString(16).toUpperCase()})`
@@ -350,7 +353,7 @@
                 
                 tr.innerHTML = `
                     <td>${codeDisplay}</td>
-                    <td>${row.type}</td>
+                    <td>${codeTypeBadge}</td>
                     <td>${row.name}</td>
                     <td>${row.description}</td>
                     <td>${row.isError ? 'Yes' : 'No'}</td>

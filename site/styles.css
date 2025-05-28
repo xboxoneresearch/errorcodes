@@ -393,12 +393,26 @@ tr:hover {
     margin: 2px;
     color: white;
 }
-.console-badge.XOP { background-color: #107C10; }
-.console-badge.XOS { background-color: #107C10; }
-.console-badge.XOX { background-color: #107C10; }
-.console-badge.XSS { background-color: #0078D4; }
-.console-badge.XSX { background-color: #0078D4; }
+.console-badge.XOP { background-color: #9656a2; }
+.console-badge.XOS { background-color: #369acc; }
+.console-badge.XOX { background-color: #95cf92; }
+.console-badge.XSS { background-color: #f8e16f; }
+.console-badge.XSX { background-color: #f4895f; }
 .console-badge.ALL { background-color: #666666; }
+
+.codetype-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    margin: 2px;
+    color: white;
+}
+
+.codetype-badge.SMC { background-color: #0c2c56; }
+.codetype-badge.SP  { background-color: #005c5c; }
+.codetype-badge.CPU { background-color: #686868; }
+.codetype-badge.OS  { background-color: #d50032; }
 
 footer {
     margin-top: 3em;
