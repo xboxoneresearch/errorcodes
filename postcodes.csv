@@ -109,7 +109,7 @@
 "XOS","SMC","0xE422",,1,"THERMAL_22",
 "XOS","SMC","0xE423",,1,"THERMAL_23",
 "XOS","SMC","0xE424",,1,"THERMAL_24",
-"XOS","SMC","0x9134",,1,"MEMORY_S","General memory error (MEM <-> APU), check V_Memio / VTT A-D resistances&voltages, check resistors around rams, replace rams (ZQ method?), reball apu."
+"XOS","CPU","0x9134",,1,"MEMORY_S","General memory error (MEM <-> APU), check V_Memio / VTT A-D resistances&voltages, check resistors around rams, replace rams (ZQ method?), reball apu."
 "XOS","CPU","0x05f9",,0,"MEMORY_S_BYP","Thrown with memory error on ONE S"
 "XSS,XSX","SP","0x0301",,0,"BOOT_SUCCESS",
 "XSS,XSX","CPU","0x3600",,0,"BOOT_SUCCESS",
