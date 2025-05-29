@@ -35,6 +35,88 @@
             Consider a <a href="https://github.com/sponsors/tuxuser">donation or sponsoring</a> if you find this project useful!
             </center>
         </div>
+        <div class="info-text">
+            <center>
+            Do you want to help grow this database?<br><br> <button id="submit-code-btn" class="submit-code-btn"> Submit new error-code</button>
+            </center>
+        </div>
+
+        <!-- Modal -->
+        <div id="submit-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Submit Error Code</h2>
+                <form action="https://nocodeform.io/f/6838a75640c263b75e9d8dff" method="POST" class="submit-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Error Code" name="code" required>
+                    </div>
+                    <div class="form-group">
+                        <select name="console_type" required>
+                            <option value="">Select Console Type</option>
+                            <option value="xbox_one_phat">Xbox One Phat</option>
+                            <option value="xbox_one_s">Xbox One S</option>
+                            <option value="xbox_one_x">Xbox One X</option>
+                            <option value="series_s">Xbox Series S</option>
+                            <option value="series_x">Xbox Series X</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="code_type" required>
+                            <option value="">Select Code Type</option>
+                            <option value="smc">SMC</option>
+                            <option value="sp">SP</option>
+                            <option value="cpu">CPU</option>
+                            <option value="os">OS</option>
+                        </select>
+                    </div>
+                    <div class="form-group radio-group">
+                        <label>Is this an error?</label>
+                        <div class="radio-options">
+                            <div>
+                                <input type="radio" name="is_error" value="true" id="error_yes" required>
+                                <label for="error_yes">Yes</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="is_error" value="false" id="error_no">
+                                <label for="error_no">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Please provide as many technical informations as possible.
+                        <ul>
+                            <li>Which components are involved?</li>
+                            <li>Components to check / measure</li>
+                            <li>etc.</li>
+                        </ul>
+                        <textarea name="technical_infos" placeholder="Technical information" required></textarea>
+                    </div>
+                    <div class="form-group radio-group">
+                        <label>Was it fixed?</label>
+                        <div class="radio-options">
+                            <div>
+                                <input type="radio" name="fixed" value="yes" id="fixed_yes" required>
+                                <label for="fixed_yes">Yes</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="fixed" value="no" id="fixed_no">
+                                <label for="fixed_no">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Additional information"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="submit-button">Submit Code</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div id="loading" class="loading">Loading error codes...</div>
         <div id="error" class="error" style="display: none;"></div>
         <div id="table-container" class="table-container" style="display: none;">
@@ -91,6 +173,15 @@
         </div>
     </main>
 
+    <!-- Thank you popup -->
+    <div id="thanks-popup" class="modal">
+        <div class="modal-content thanks-content">
+            <span class="close-modal">&times;</span>
+            <h2>Thank You!</h2>
+            <p>Thanks for submitting a new error code. We will review it and update the site.</p>
+        </div>
+    </div>
+
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -108,6 +199,50 @@
 
     <script type="module">
         import { filters, setupFilters, updateActiveFilters, applyFilters } from './filters.js';
+
+        // Check for thanks parameter and show popup if present
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('thanks')) {
+            const thanksPopup = document.getElementById('thanks-popup');
+            const closeThanks = thanksPopup.querySelector('.close-modal');
+            
+            thanksPopup.style.display = "block";
+            
+            closeThanks.onclick = function() {
+                thanksPopup.style.display = "none";
+                // Remove the thanks parameter from URL without reloading
+                const newUrl = window.location.pathname + window.location.search.replace(/[?&]thanks/, '');
+                window.history.replaceState({}, '', newUrl);
+            }
+            
+            window.onclick = function(event) {
+                if (event.target == thanksPopup) {
+                    thanksPopup.style.display = "none";
+                    // Remove the thanks parameter from URL without reloading
+                    const newUrl = window.location.pathname + window.location.search.replace(/[?&]thanks/, '');
+                    window.history.replaceState({}, '', newUrl);
+                }
+            }
+        }
+
+        // Modal handling
+        const modal = document.getElementById('submit-modal');
+        const btn = document.getElementById('submit-code-btn');
+        const span = document.getElementsByClassName('close-modal')[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
 
         const SUPPORTED_FORMAT_VERSION = 2;
         let errorData = [];
