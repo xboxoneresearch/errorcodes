@@ -2,15 +2,21 @@
 
 Repository contains listings of POST / error codes
 
-Website: https://xboxoneresearch.github.io/errorcodes/
+Website: <https://errors.xboxresearch.com>
 
-[POST Codes list](./postcodes.csv)
+Errors:
 
-[System errors list](./system.csv)
-
-[System errors (E errors) by @TorusHyperV](https://github.com/TorusHyperV/XboxOne-EXXX-err-Codes)
+- [POST Codes list](./postcodes.csv) - POST codes
+- [System errors list](./oserrors.csv) - Errors thrown by the operating system (NTSTATUS / HRESULT)
+- [Errormasks](./errormasks.csv) - Used for categorizing some codes, when distinct identifier is unknown
+- [System errors (E errors) by @TorusHyperV](https://github.com/TorusHyperV/XboxOne-EXXX-err-Codes)
 
 These will be transferred over here eventually to have everything in one place.
+
+Related projects:
+
+- [PicoDurangoPOST](https://github.com/xboxoneresearch/PicoDurangoPOST) - RasPi Pico firmware to read POST codes from hardware
+- [XboxPostcodeMonitor](https://github.com/xboxoneresearch/XboxPostcodeMonitor) - Serial monitor software for `PicoDurangoPOST` that syncs from this repo/site.
 
 ## Console Types
 
