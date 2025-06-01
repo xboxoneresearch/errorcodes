@@ -46,7 +46,7 @@
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
                 <h2>Submit Error Code</h2>
-                <form action="https://nocodeform.io/f/6838a75640c263b75e9d8dff" method="POST" class="submit-form">
+                <form action="https://errorcodes-submit.xboxresearch.workers.dev" method="POST" class="submit-form">
                     <div class="form-group">
                         <input type="email" placeholder="Email" name="email" required>
                     </div>
@@ -110,6 +110,8 @@
                     <div class="form-group">
                         <textarea name="message" placeholder="Additional information"></textarea>
                     </div>
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAABfm3NtFmjNYivUq"></div>
+                    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
                     <div class="form-group">
                         <button type="submit" class="submit-button">Submit Code</button>
                     </div>
