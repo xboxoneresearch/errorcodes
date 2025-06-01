@@ -113,6 +113,16 @@
 "XOS","CPU","0x05f9",,0,"MEMORY_S_BYP","Thrown with memory error on ONE S"
 "XSS,XSX","SP","0x0301",,0,"BOOT_SUCCESS",
 "XSS,XSX","CPU","0x3600",,0,"BOOT_SUCCESS",
+"XSX","SP","0xCC01","0xFC01",1,"RAM_ERR_BANK_E","Bank E failure: Check resistors/traces surrounding bank E. Reball bank E. Replace bank E. Reball apu, APU."
+"XSX","SP","0xCC02","0xFC02",1,"RAM_ERR_BANK_F","Bank F failure: Check resistors/traces surrounding bank F. Reball bank F. Replace bank F. Reball apu, APU."
+"XSX","SP","0xCC04","0xFC04",1,"RAM_ERR_BANK_B","Bank B failure: Check resistors/traces surrounding bank B. Reball bank B. Replace bank B. Reball apu, APU."
+"XSX","SP","0xCC08","0xFC08",1,"RAM_ERR_BANK_I","Bank I failure: Check resistors/traces surrounding bank I. Reball bank I. Replace bank I. Reball apu, APU."
+"XSX","SP","0xCC10","0xFC10",1,"RAM_ERR_BANK_D","Bank D failure: Check resistors/traces surrounding bank D. Reball bank D. Replace bank D. Reball apu, APU."
+"XSX","SP","0xCC20","0xFC20",1,"RAM_ERR_BANK_G","Bank G failure: Check resistors/traces surrounding bank G. Reball bank G. Replace bank G. Reball apu, APU."
+"XSX","SP","0xCC40","0xFC40",1,"RAM_ERR_BANK_C","Bank C failure: Check resistors/traces surrounding bank C. Reball bank C. Replace bank C. Reball apu, APU."
+"XSX","SP","0xCC80","0xFC80",1,"RAM_ERR_BANK_H","Bank H failure: Check resistors/traces surrounding bank H. Reball bank H. Replace bank H. Reball apu, APU."
+"XSX","SP","0xCD00","0xFD00",1,"RAM_ERR_BANK_A","Bank A failure: Check resistors/traces surrounding bank A. Reball bank A. Replace bank A. Reball apu, APU."
+"XSX","SP","0xCE00","0xFE00",1,"RAM_ERR_BANK_J","Bank J failure: Check resistors/traces surrounding bank J. Reball bank J. Replace bank J. Reball apu, APU."
 "XOP,XOS,XOX","SP","0x0075",,0,"BOOT_SUCCESS",
 "XOP,XOS,XOX","CPU","0x14FF",,0,"BOOT_SUCCESS",
 "XOP,XOS,XOX","CPU","0x0100","0xFF00",0,"2BL_UNKNOWN",
