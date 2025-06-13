@@ -44,5 +44,5 @@ for entry in meta.items:
   with open(entry.path, "rt", newline="") as f:
     reader = csv.DictReader(f, restkey="rest")
     for row in reader:
+      print(f"Checking: {row}")
       res = validator(row)
-      print(res)
