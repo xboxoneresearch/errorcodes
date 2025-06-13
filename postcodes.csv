@@ -126,7 +126,7 @@
 "XSX","SP","0xCD00","0xFD00",1,"RAM_ERR_BANK_A","Bank A failure: Check resistors/traces surrounding bank A. Reball bank A. Replace bank A. Reball apu, APU."
 "XSX","SP","0xCE00","0xFE00",1,"RAM_ERR_BANK_J","Bank J failure: Check resistors/traces surrounding bank J. Reball bank J. Replace bank J. Reball apu, APU."
 "XSX","SMC","0xE006",,1,"RAM_ERR_V1P8","Check for shorts on V_DRAM1P8 line"
-"XSS","SMC","0xE08C",,1,"VINSEN_12P0_MEMIOPHYSOC", "12V Voltage enable failure, Check MP2926 (U480) and components around it"
+"XSS","SMC","0xE08C",,1,"VINSEN_12P0_MEMIOPHYSOC","12V Voltage enable failure, Check MP2926 (U480) and components around it"
 "XOP,XOS,XOX","SP","0x0075",,0,"BOOT_SUCCESS",
 "XOP,XOS,XOX","CPU","0x14FF",,0,"BOOT_SUCCESS",
 "XOP,XOS,XOX","CPU","0x0100","0xFF00",0,"2BL_UNKNOWN",
