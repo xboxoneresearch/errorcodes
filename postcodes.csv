@@ -145,6 +145,27 @@
 "XOP,XOS,XOX","CPU","0x1200","0xFF00",0,"2BL_BlLoadVbi_6",
 "XOP,XOS,XOX","CPU","0x1300","0xFF00",0,"2BL_BlLoadVbi_7",
 "XOP,XOS,XOX","CPU","0x1400","0xFF00",0,"2BL_FINAL",
+"XOP,XOS,XOX","CPU","0x8000","0xFF00",1,"2BL_FATAL_VBI_ALIGNMENT","boot.bin file on eMMC is corrupt"
+"XOP,XOS,XOX","CPU","0x8100","0xFF00",1,"2BL_FATAL_VBI_LENGTH","boot.bin file on eMMC is corrupt"
+"XOP,XOS,XOX","CPU","0x8200","0xFF00",1,"2BL_FATAL_VBI_CRYPTED_HASH","boot.bin file on eMMC is corrupt"
+"XOP,XOS,XOX","CPU","0x8300","0xFF00",1,"2BL_FATAL_VBI_HEADER","boot.bin file on eMMC is corrupt"
+"XOP,XOS,XOX","CPU","0x8400","0xFF00",1,"2BL_FATAL_VBI_PLAINTEXT_HASH","boot.bin file on eMMC is corrupt"
+"XOP,XOS,XOX","CPU","0x8500","0xFF00",1,"2BL_FATAL_VBI_SCP","boot.bin file on eMMC is corrupt"
+"XOP,XOS,XOX","CPU","0x8600","0xFF00",1,"2BL_FATAL_VBI_KEYTABLE","boot.bin file on eMMC is corrupt"
+"XOP,XOS,XOX","CPU","0x8700","0xFF00",1,"2BL_FATAL_UNK87",
+"XOP,XOS,XOX","CPU","0x8800","0xFF00",1,"2BL_FATAL_LOAD_FLASH","Failed to load data from eMMC, eMMC hw/data faulty?"
+"XOP,XOS,XOX","CPU","0x8900","0xFF00",1,"2BL_FATAL_UNK89",
+"XOP,XOS,XOX","CPU","0x8A00","0xFF00",1,"2BL_FATAL_FIND_BOOTSLOT","Failed to load data from eMMC, eMMC hw/data faulty?"
+"XOP,XOS,XOX","CPU","0x8B00","0xFF00",1,"2BL_FATAL_CPU_CAR","CPU CAR  failure"
+"XOP,XOS,XOX","CPU","0x8C00","0xFF00",1,"2BL_FATAL_VBI_ASLR","VBI ASLR failed, boot.bin corrupt?"
+"XOP,XOS,XOX","CPU","0x8D00","0xFF00",1,"2BL_FATAL_UNK8D",
+"XOP,XOS,XOX","CPU","0x8E00","0xFF00",1,"2BL_FATAL_UNK8E",
+"XOP,XOS,XOX","CPU","0x8F00","0xFF00",1,"2BL_FATAL_GS_FAIL","Threading failure (GS register)"
+"XOP,XOS,XOX","CPU","0x9000","0xFF00",1,"2BL_FATAL_UNK90",
+"XOP,XOS,XOX","CPU","0x9100","0xFF00",1,"2BL_FATAL_UNK91",
+"XOP,XOS,XOX","CPU","0x9200","0xFF00",1,"2BL_FATAL_AGESA","Generic AGESA error"
+"XOP,XOS,XOX","CPU","0x9300","0xFF00",1,"2BL_FATAL_UNK93",
+"XOP,XOS,XOX","CPU","0x9400","0xFF00",1,"2BL_FATAL_VBI_DEBUGGER_SETUP","Failed setting up debugger loader block in VBI"
 "XOP,XOS,XOX","CPU","0x0000","0x00FF",0,"StartProcessorTestPoints","Entry used for range testing for @b Processor related TPs"
 "XOP,XOS,XOX","CPU","0x0001","0x00FF",0,"TpProcMemBeforeMemDataInit","Memory structure initialization (Public interface)"
 "XOP,XOS,XOX","CPU","0x0002","0x00FF",0,"TpProcMemBeforeSpdProcessing","SPD Data processing  (Public interface)"
