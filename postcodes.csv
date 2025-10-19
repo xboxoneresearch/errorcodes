@@ -134,6 +134,10 @@
 "XSX","SMC","0xE08C",,1,"VINSEN_12P0_MEMIOPHYSOC","User report: 12V not detected by U480 or possible U57, check R132, R140, R252 and R253 (surrounding traces corroded?), check voltage on VINSEN pin of both chips"
 "XSS,XSX","SP","0x0301",,0,"BOOT_SUCCESS",
 "XSS,XSX","CPU","0x3600",,0,"BOOT_SUCCESS",
+"XSS","SP","0xCC01","0xFC01",1,"RAM_ERR_BANK_A","Bank A1 or/and A2 failure: Check resistors/traces surrounding bank A1 and A2. Reball bank A1 or/and A2. Replace bank A1 or/and A2. Reball APU, APU."
+"XSS","SP","0xCC04","0xFC04",1,"RAM_ERR_BANK_B","Bank B failure: Check resistors/traces surrounding bank B. Reball bank B. Replace bank B. Reball APU, APU."
+"XSS","SP","0xCC08","0xFC08",1,"RAM_ERR_BANK_C","Bank C failure: Check resistors/traces surrounding bank C. Reball bank C. Replace bank C. Reball APU, APU."
+"XSS","SP","0xCC02","0xFC02",1,"RAM_ERR_BANK_D","Bank D failure: Check resistors/traces surrounding bank D. Reball bank D. Replace bank D. Reball APU, APU."
 "XSX","SP","0xCC01","0xFC01",1,"RAM_ERR_BANK_E","Bank E failure: Check resistors/traces surrounding bank E. Reball bank E. Replace bank E. Reball apu, APU."
 "XSX","SP","0xCC02","0xFC02",1,"RAM_ERR_BANK_F","Bank F failure: Check resistors/traces surrounding bank F. Reball bank F. Replace bank F. Reball apu, APU."
 "XSX","SP","0xCC04","0xFC04",1,"RAM_ERR_BANK_B","Bank B failure: Check resistors/traces surrounding bank B. Reball bank B. Replace bank B. Reball apu, APU."
