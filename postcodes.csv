@@ -131,6 +131,7 @@
 "XSS,XSX","SP","0x01C0",,1,"UNKNOWN_CLK_1","Known unknown, thrown with 62FC when removing FB0. U17 unable to bring up PCIE CLock lines?"
 "XSS,XSX","SP","0x62FC",,1,"UNKNOWN_CLK_2","Known unknown, thrown with 01C0 when removing FB0. U17 unable to bring up PCIE CLock lines?"
 "XSS,XSX","SP","0x04E6",,1,"BL_MISS","Known unknown, thrown with missmatched southbridge board. NOR/SSD corruption?"
+"XSS,XSX","SP","0x00B1",,1,"SVID_MISS","Thrown when SVID Communication fails between U57 <-> APU. 00B1 after 0236: Check R288, R219, R220, R808, R809, R628, R627, R626. Replace U57"
 "XSS,XSX","OS","0xA113",,1,"ENET_INIT","Failing to initialize Ethernet ic -> replace U47"
 "XSS,XSX","SP","0x0007",,1,"APU_SHUTDOWN","APU shutdown, General Error - Often byproduct, low priority."
 "XSS","SMC","0xE046",,1,"SMC_FATAL_GFXCPU_I2C_UNREACHABLE","GFXCORE/CPUCORE regulator did not respond through i2c -> check R231, R233, C391, R563, surrounding traces/corrosion, replace U57"
