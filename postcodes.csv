@@ -120,7 +120,7 @@
 
 "XSS,XSX","SMC","0xEB40",,1,"BOOT_SBUNRESETWAIT","Unable to unreset southbridge: V_SB1P1 or V_SB1P8 shorted? Check V_SB1P1/V_SB1P8 voltage while on. Possible southbridge missing clock, thrown with FB3/FB4 removed, U17 or U2 bad? replace southbridge"
 "XSS,XSX","SMC","0xEB41",,1,"BOOT_PSPBOOTACKWAIT_DONE","APU is not responding: V_CPUCORE/V_GFXCORE available while on? Possible missing/shorted V_SOCPHY, V_FUSE, V3p3. Apu cracked?"
-"XSS,XSX","SMC","0xEB45",,1,"SSD_INIT1","no codes while standby, after powerbuttonpress; 30 sec on/off: SSD undetected. Check SSD Health in PC with Crystaldiskinfo
+"XSS,XSX","SMC","0xEB45",,1,"SSD_INIT1","no codes while standby, after powerbuttonpress; 30 sec on/off: SSD undetected. Check SSD Health in PC with Crystaldiskinfo"
 "XSS,XSX","SP","0xEB4C",,1,"PEX_COMM","Known unknown, Usually communication issue on PEX between southbridge <-> APU, reseat "board to board flex" (is B2B flex or connector damaged?). Some very tiny capacitors near B2B connector and back of apu cause this error. Replace southbridge, reball apu."
 
 "XSS,XSX","SMC","0x0a80",,1,"SSD_INIT2","1 sec on/off: Thrown with SSD missmatch, possibly corrupted/bad ssd?"
