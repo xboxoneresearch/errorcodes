@@ -6,10 +6,10 @@
 Returns 0 on success, 1 otherwise
 """
 
-import sys
 import csv
-from meta_definition import MetaDefinition, MetaType, validate_definition
+import sys
 from csv_definition import PostCodeDefinition, ErrorMaskDefinition, OSErrorDefinition
+from meta_definition import MetaDefinition, MetaType, validate_definition
 
 VALIDATORS = {
   MetaType.PostCodes: PostCodeDefinition.validate,

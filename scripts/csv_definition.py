@@ -1,10 +1,9 @@
 from dataclasses import dataclass
-from typing import List
 
 ALL_CONSOLE_TYPES = ["ALL", "XOP", "XOS", "XOX", "XSS", "XSX"]
 ALL_CODE_TYPES = ["SMC", "SP", "CPU", "OS"]
 
-def split_console_column(column: str) -> List[str] | str:
+def split_console_column(column: str) -> list[str] | str:
     res = None
     if "," in column:
         consoles = column.split(",")
@@ -13,7 +12,7 @@ def split_console_column(column: str) -> List[str] | str:
         res = column
     return res
 
-def verify_console(console: List[str] | str) -> bool:
+def verify_console(console: list[str] | str) -> bool:
     if isinstance(console, list):
         assert len(console) == len(set(console))
         assert set(console).issubset(ALL_CONSOLE_TYPES)
@@ -25,7 +24,7 @@ def verify_console(console: List[str] | str) -> bool:
 
 @dataclass
 class PostCodeDefinition:
-    Console: List[str] | str
+    Console: list[str] | str
     Type: str
     Code: int
     Bitmask: int | None
@@ -50,14 +49,14 @@ class PostCodeDefinition:
             Type=row["Type"],
             Code=int(row["Code"], 16),
             Bitmask=(int(row["Bitmask"], 16) if row["Bitmask"] else None),
-            IsError=True if row["IsError"] == "1" else False,
+            IsError=row["IsError"] == "1",
             Name=row["Name"],
             Description=row["Description"] 
         )
 
 @dataclass
 class ErrorMaskDefinition:
-    Console: List[str] | str
+    Console: list[str] | str
     Type: str
     Bitmask: int
     Code: int
@@ -87,7 +86,7 @@ class ErrorMaskDefinition:
 
 @dataclass
 class OSErrorDefinition:
-    Console: List[str] | str
+    Console: list[str] | str
     Type: str
     Code: int
     Name: str

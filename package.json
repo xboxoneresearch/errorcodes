@@ -1,0 +1,13 @@
+{
+    "name": "errorcodes-site",
+    "private": true,
+    "scripts": {
+        "create_meta": "./scripts/create_meta.py --postcodes postcodes.csv --errormasks errormasks.csv --oserrors oserrors.csv meta.json",
+        "build": "npm run create_meta && rm -rf dist && mkdir -p dist && cp -r site/* dist/ && cp *.csv dist/ && cp meta.json dist/ && tsc",
+        "dev": "serve ./dist/"
+    },
+    "devDependencies": {
+        "typescript": "^5.9.3",
+        "serve": "^14.2.6"
+    }
+}

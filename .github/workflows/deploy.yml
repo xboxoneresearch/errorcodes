@@ -30,20 +30,21 @@ jobs:
         run: pip install -U uv
       - name: Verify CSVs
         run: ./scripts/verify_via_meta.py meta.json.sample
-      - name: Create meta file
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build site
         run: |
-          ./scripts/create_meta.py --postcodes postcodes.csv --errormasks errormasks.csv --oserrors oserrors.csv meta.json
-      - name: Copy files into site-dir
-        run: |
-          cp meta.json site/
-          cp *.csv site/
+          npm ci
+          npm run build
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: site
+          name: dist
           if-no-files-found: error
           path: |
-            site
+            dist
 
   deploy:
     needs: prepare
@@ -55,8 +56,8 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: site
-          path: site
+          name: dist
+          path: dist
       - name: List current dir
         run: ls -R
       - name: Setup Pages
@@ -64,7 +65,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'site'
+          path: 'dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

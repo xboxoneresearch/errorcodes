@@ -1,12 +1,11 @@
 #!/usr/bin/env -S uv run --script
 # /// script
-# dependencies = ["pydantic==2.11.5"]
+# dependencies = ["pydantic==2.13.4"]
 # ///
 import sys
 from enum import StrEnum
 from datetime import datetime
 from pydantic import BaseModel, field_serializer
-from typing import List
 
 META_FORMAT_VERSION = 2
 
@@ -24,7 +23,7 @@ class MetaEntry(BaseModel, ser_json_bytes="base64", val_json_bytes='base64'):
 class MetaDefinition(BaseModel):
     formatVersion: int
     updated: datetime
-    items: List[MetaEntry]
+    items: list[MetaEntry]
 
     @field_serializer('updated', when_used='json')
     def serialize_datetime(self, updated: datetime):

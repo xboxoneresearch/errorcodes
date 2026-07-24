@@ -62,6 +62,16 @@ To open/edit the CSV files in LibreOffice Calc, use the following settings:
 
 ![Libreoffice Calc CSV settings](./assets/csv_libreoffice_calc.png)
 
+## Building the site
+
+The site's client-side logic is written in TypeScript (`src/*.ts`). `site/` holds the static source (HTML, CSS, assets); `npm run build` compiles the TypeScript and assembles the deployable site into `dist/`.
+
+```sh
+npm install
+npm run build
+npm run dev   # serves dist/ at http://localhost:3000
+```
+
 ## Scripts
 
 There are scripts to verify CSVs and also create metadata.
