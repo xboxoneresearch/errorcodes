@@ -162,7 +162,7 @@
 "XOP,XOS,XOX,XSS,XSX","OS","0x30000006B",,1,"UEM_HOST_ENGINEERING_HARDWARE_EXPIRED","E107 - Devkit certificate issue"
 "XOP,XOS,XOX","OS","0x30000006D",,1,"UEM_HOST_WRONG_HARDWARE","E109 - Wrong SSD/HDD Type, or a drive from a different console, has been installed in the console. Format drive (DONT do this on Series consoles), reinstall OSU1, try a different SSD/HDD."
 "XSS,XSX","OS","0x30000006D",,1,"UEM_HOST_WRONG_HARDWARE","E109 - Wrong SSD Type has been installed - for example WD PC SN530 instead of WD CH SN530. Try OSU1, check drive health in crystaldiskinfo, clone firmware to a working drive."
-"XOP,XOS,XOX,XSS,XSX","OS","0x3000000C8",,1,"UEM_SYS_BUGCHECK","E200"
+"XOP,XOS,XOX,XSS,XSX","OS","0x3000000C8",,1,"UEM_SYS_BUGCHECK","E200 - See https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-code-reference2#review-bug-check-codes for the secondary code shown on screen."
 "XOP,XOS,XOX,XSS,XSX","OS","0x3000000C9",,1,"UEM_SYS_XCI_FAILURE","E201 - Code Integrity issue - files corrupt?"
 "XOP,XOS,XOX,XSS,XSX","OS","0x3000000CA",,1,"UEM_SYS_XAM_FAILURE","E202"
 "XOP,XOS,XOX,XSS,XSX","OS","0x3000000CB",,1,"UEM_SYS_SYSTEM_UPDATE_PASS3","E203 - Pairing system update failure?"
