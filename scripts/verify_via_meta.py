@@ -1,6 +1,6 @@
 #!/usr/bin/env -S uv run --script
 # /// script
-# dependencies = ["pydantic==2.11.5"]
+# dependencies = ["pydantic==2.13.4"]
 # ///
 """
 Returns 0 on success, 1 otherwise
