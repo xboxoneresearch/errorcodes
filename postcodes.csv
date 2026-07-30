@@ -168,7 +168,7 @@
 "XOP,XOS,XOX,XSS,XSX","OS","0x3000000CB",,1,"UEM_SYS_SYSTEM_UPDATE_PASS3","E203 - Pairing system update failure?"
 "XOP,XOS,XOX,XSS,XSX","OS","0x3000000CD",,1,"UEM_SYS_UPDMGR_CRASH","E205"
 "XOP,XOS,XOX,XSS,XSX","OS","0x3000000D0",,1,"UEM_SYS_XBOX_USERMODE_INIT_FAILURE","E208"
-"XSS,XSX","SP","0x0007",,1,"RAM_SHUTDOWN","Shutdown due to memory error.. last code shows which chip. rerun multiple times or ask on discord, if no Bank data is decoded."
+"XSS,XSX","SP","0x70000",,1,"RAM_SHUTDOWN","Shutdown due to memory error.. last code shows which chip. rerun multiple times or ask on discord, if no Bank data is decoded."
 "XSS,XSX","SP","0x04A5",,1,"KNOWN_UNKNOWN1","04A5 Solution is unknown. Tried clone SSD, changing SB, powersupply and XBFS repair. please report if you find the solution."
 "XSS","SMC","0xE046",,1,"SMC_FATAL_GFXCPU_I2C_UNREACHABLE","GFXCORE/CPUCORE regulator did not respond through i2c -> check R231, R233, C391, R563, surrounding traces/corrosion, replace U57"
 "XSS","SMC","0xE04C",,1,"SMC_FATAL_MEMPHYIOSOC_I2C_UNREACHABLE","MEMPHY/MEMIO/SOC regulator did not respond through i2c -> 3p3stby available on R171? (if no, investigate U54 area). if 3p3stby available, check R171, C18, R655, R675, surrounding traces/corrosion, replace U480"
@@ -208,6 +208,16 @@
 "XSX","SP","0xCC80","0xFC80",1,"RAM_ERR_BANK_H","Bank H failure: Check resistors/traces surrounding bank H. Reball bank H. Replace bank H. Reball apu, APU."
 "XSX","SP","0xCD00","0xFD00",1,"RAM_ERR_BANK_A","Bank A failure: Check resistors/traces surrounding bank A. Reball bank A. Replace bank A. Reball apu, APU."
 "XSX","SP","0xCE00","0xFE00",1,"RAM_ERR_BANK_J","Bank J failure: Check resistors/traces surrounding bank J. Reball bank J. Replace bank J. Reball apu, APU."
+"XSX","SP","0xAA01","0xFE01",1,"RAM_ERR_BANK_E","Bank E failure: Check resistors/traces surrounding bank E. Reball bank E. Replace bank E. Reball apu, APU."
+"XSX","SP","0xAA02","0xFE02",1,"RAM_ERR_BANK_F","Bank F failure: Check resistors/traces surrounding bank F. Reball bank F. Replace bank F. Reball apu, APU."
+"XSX","SP","0xAA04","0xFE04",1,"RAM_ERR_BANK_B","Bank B failure: Check resistors/traces surrounding bank B. Reball bank B. Replace bank B. Reball apu, APU."
+"XSX","SP","0xBB08","0xFF08",1,"RAM_ERR_BANK_I","Bank I failure: Check resistors/traces surrounding bank I. Reball bank I. Replace bank I. Reball apu, APU."
+"XSX","SP","0xAA10","0xFE10",1,"RAM_ERR_BANK_D","Bank D failure: Check resistors/traces surrounding bank D. Reball bank D. Replace bank D. Reball apu, APU."
+"XSX","SP","0xAA20","0xFE20",1,"RAM_ERR_BANK_G","Bank G failure: Check resistors/traces surrounding bank G. Reball bank G. Replace bank G. Reball apu, APU."
+"XSX","SP","0xAA40","0xFE40",1,"RAM_ERR_BANK_C","Bank C failure: Check resistors/traces surrounding bank C. Reball bank C. Replace bank C. Reball apu, APU."
+"XSX","SP","0xAA80","0xFE80",1,"RAM_ERR_BANK_H","Bank H failure: Check resistors/traces surrounding bank H. Reball bank H. Replace bank H. Reball apu, APU."
+"XSX","SP","0xAB00","0xFF00",1,"RAM_ERR_BANK_A","Bank A failure: Check resistors/traces surrounding bank A. Reball bank A. Replace bank A. Reball apu, APU."
+"XSX","SP","0xAA00","0xFE00",1,"RAM_ERR_BANK_J","Bank J failure: Check resistors/traces surrounding bank J. Reball bank J. Replace bank J. Reball apu, APU."
 "XOP,XOS,XOX","SP","0x0075",,0,"BOOT_SUCCESS",
 "XOP,XOS,XOX","CPU","0x14FF",,0,"BOOT_SUCCESS",
 "XOP,XOS,XOX","CPU","0x0100","0xFF00",0,"2BL_UNKNOWN",
