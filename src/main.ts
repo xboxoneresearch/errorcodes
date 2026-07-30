@@ -36,7 +36,7 @@ btn.onclick = function () {
 const SUPPORTED_FORMAT_VERSION = 2;
 let errorData: ErrorRow[] = [];
 let currentSort: { column: keyof ErrorRow; direction: 'asc' | 'desc' } = { column: 'code', direction: 'asc' };
-let showBitmasks = false;
+let showBitmasks = true;
 
 interface MetaItem {
     metaType: string;
@@ -60,7 +60,7 @@ function getQueryParams() {
         search: params.get('search') || '',
         sort: (params.get('sort') || 'code') as keyof ErrorRow,
         direction: (params.get('direction') || 'asc') as 'asc' | 'desc',
-        bitmask: params.get('bitmask') === 'true'
+        bitmask: params.has('bitmask') ? params.get('bitmask') === 'true' : true
     };
 }
 
@@ -72,7 +72,7 @@ function updateURL(): void {
     if (filters.search) params.set('search', filters.search);
     if (currentSort.column !== 'code') params.set('sort', currentSort.column);
     if (currentSort.direction !== 'asc') params.set('direction', currentSort.direction);
-    if (showBitmasks) params.set('bitmask', 'true');
+    if (!showBitmasks) params.set('bitmask', 'false');
 
     const newURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
     window.history.replaceState({}, '', newURL);
